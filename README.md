@@ -1,2 +1,2 @@
 # micronets
-The landing repository for the Micronets publc codebase
+The landing repository for the Micronets public codebase
