@@ -1,0 +1,6 @@
+baseURL = "https://cablelabs.github.io/micronets"
+languageCode = "en-us"
+title = "CableLabs Micronets"
+publishDir =  "../docs"
+
+
