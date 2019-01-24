@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+  xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  
+  <url>
+    <loc>https://cablelabs.github.io/micronets/getting-started/</loc>
+  </url>
+  
+  <url>
+    <loc>https://cablelabs.github.io/micronets/micronets-gateway/</loc>
+  </url>
+  
+  <url>
+    <loc>https://cablelabs.github.io/micronets/server-components/</loc>
+  </url>
+  
+  <url>
+    <loc>https://cablelabs.github.io/micronets/microwiki/authorization-server-mso/</loc>
+  </url>
+  
+  <url>
+    <loc>https://cablelabs.github.io/micronets/microwiki/component-doc-template/</loc>
+  </url>
+  
+  <url>
+    <loc>https://cablelabs.github.io/micronets/microwiki/docker-deployment-guide/</loc>
+  </url>
+  
+  <url>
+    <loc>https://cablelabs.github.io/micronets/microwiki/home/</loc>
+  </url>
+  
+  <url>
+    <loc>https://cablelabs.github.io/micronets/microwiki/idora-client-mobile-app/</loc>
+  </url>
+  
+  <url>
+    <loc>https://cablelabs.github.io/micronets/microwiki/idora-server-credential-server/</loc>
+  </url>
+  
+  <url>
+    <loc>https://cablelabs.github.io/micronets/microwiki/mso-portal-stub/</loc>
+  </url>
+  
+  <url>
+    <loc>https://cablelabs.github.io/micronets/microwiki/mso-portal/</loc>
+  </url>
+  
+  <url>
+    <loc>https://cablelabs.github.io/micronets/microwiki/micronets-mud-tools/</loc>
+  </url>
+  
+  <url>
+    <loc>https://cablelabs.github.io/micronets/microwiki/micronets-manager/</loc>
+  </url>
+  
+  <url>
+    <loc>https://cablelabs.github.io/micronets/microwiki/onboarding-demo-troubleshooter/</loc>
+  </url>
+  
+  <url>
+    <loc>https://cablelabs.github.io/micronets/microwiki/protomed-device-user-manual/</loc>
+  </url>
+  
+  <url>
+    <loc>https://cablelabs.github.io/micronets/microwiki/qrcode-scanner-operation/</loc>
+  </url>
+  
+  <url>
+    <loc>https://cablelabs.github.io/micronets/microwiki/registration-server-clinic/</loc>
+  </url>
+  
+  <url>
+    <loc>https://cablelabs.github.io/micronets/microwiki/the-micronets-gateway/</loc>
+  </url>
+  
+  <url>
+    <loc>https://cablelabs.github.io/micronets/microwiki/the-micronets-websocket-proxy/</loc>
+  </url>
+  
+  <url>
+    <loc>https://cablelabs.github.io/micronets/categories/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://cablelabs.github.io/micronets/</loc>
+  </url>
+  
+  <url>
+    <loc>https://cablelabs.github.io/micronets/microwiki/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://cablelabs.github.io/micronets/tags/</loc>
+    <priority>0</priority>
+  </url>
+  
+</urlset>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Server Components on CableLabs Micronets</title>
+    <link>https://cablelabs.github.io/micronets/server-components/</link>
+    <description>Recent content in Server Components on CableLabs Micronets</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    
+	<atom:link href="https://cablelabs.github.io/micronets/server-components/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+  </channel>
+</rss>
