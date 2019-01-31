@@ -16,7 +16,7 @@ defaultContentLanguage = "en"
 defaultContentLanguageInSubdir= false
 enableMissingTranslationPlaceholders = false
 
-ignoreFiles = ["externalContent"]
+#ignoreFiles = ["externalContent"]
 
 [Params]
     # Souce Code repository section
@@ -38,10 +38,10 @@ ignoreFiles = ["externalContent"]
     # See the format reference https://gohugo.io/functions/format/#hugo-date-and-time-templating-reference
 
     # path name excluded from documentation menu
-    menu_exclusion = ["archives", "blog", "entry", "post", "posts", "microwiki"]
+    menu_exclusion = ["archives", "externalContent"]
 
     # Added as part of the includeFile shortcode. See the documentation in the includeFile.html
-    includes_dir = ""
+    includes_dir = "externalContent"
 
 
 # Global menu section

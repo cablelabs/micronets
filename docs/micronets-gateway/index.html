@@ -4,7 +4,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 <title>Micronets Gateway - CableLabs Micronets</title>
-<meta name="description" content="Developer documentation site for CableLabs Micronets">
+<meta name="description" content="Developer documentation for CableLabs Micronets">
 <meta name="generator" content="Hugo 0.53" />
 <link href="https://cablelabs.github.io/micronetsindex.xml" rel="alternate" type="application/rss+xml">
 <link rel="canonical" href="https://cablelabs.github.io/micronets/micronets-gateway/">
@@ -19,14 +19,14 @@
 <div class="container"><header>
 <h1>CableLabs Micronets</h1>
 <a href="https://github.com/cablelabs/micronets" class="github"><i class="fab fa-github"></i></a>
-<p class="description">Developer documentation site for CableLabs Micronets</p>
+<p class="description">Developer documentation for CableLabs Micronets</p>
 
 </header>
 <div class="menu">
 <nav>
 <ul>
 <li><a href="/micronets/">Home</a></li>
-<li><a href="https://www.cablelabs.com">About CableLabs</a></li></ul>
+<li><a href="https://www.cablelabs.com/micronets">About Micronets</a></li></ul>
 </nav>
 </div>
 <div class="content-container">
@@ -46,19 +46,17 @@
         
     
 </div>
-
-
 <h1 id="the-micronets-gateway">The Micronets Gateway</h1>
 
 <h2 id="abstract-what-it-does">Abstract/What it does</h2>
 
 <p>The Micronets Gateway incorporates a number of components necessary for creating and managing Micronets on the gateway - and for enforcing the Micronets policy. For example, when the <a href="https://github.com/cablelabs/micronets/wiki/Micronets-Manager">Micronets Manager</a> creates a Micronet and provisions a device on it using the <a href="https://github.com/cablelabs/micronets-gw/tree/master/micronets-gw-service#micronets-dhcp-restcrud-interface">Gateway Service API</a>, the gateway on-boards the device onto the wireless network, provides the device its IP address when it joins the network, and ensures the device can only communicate according to the device-level and Micronet-level policy.</p>
 
-<p>For instance, if the <a href="https://github.com/cablelabs/micronets/wiki/Micronets-Manager">Micronets Manager</a> provisions a device to only communicate with particular Micronets, particular devices, or Internet endpoints/networks - by assigning policy to the Micronet and/or the device - the Gateway will enforce the policy by only allowing packets associated with the permitted to or from Micronets and/or devices via OpenVSwitch.</p>
+<p>For instance, if the <a href="https://github.com/cablelabs/micronets/wiki/Micronets-Manager">Micronets Manager</a> provisions a device to only communicate with particular Micronets, particular devices, or Internet endpoints/networks - by assigning policy to the Micronet and/or the device - the Gateway will enforce the policy by only allowing packets associated with the permitted Micronets, devices, and Internet hosts to flow through OpenVSwitch.</p>
 
 <h2 id="how-is-it-instantiated">How is it instantiated</h2>
 
-<p>The Gateway has a number of components that are installed on a Debian Linux system using an installer provided with the Micronets Gateway distribution.</p>
+<p>The Gateway has a number of components that are installed on a Linux system via Debian package.</p>
 
 <p>The <a href="https://github.com/cablelabs/micronets-gw/blob/master/micronets-gw-service/README.md">Micronets Gateway Service</a> and dependent components start when the Gateway boots and immediately connects to its peer <a href="https://github.com/cablelabs/micronets/wiki/Micronets-Manager">Micronets Manager</a> instance via the <a href="https://github.com/cablelabs/micronets/wiki/The-Micronets-websocket-proxy">Micronets Websocket Proxy</a>. If the Gateway Service isn&rsquo;t able to connect to its peer <a href="https://github.com/cablelabs/micronets/wiki/Micronets-Manager">Micronets Manager</a>, and if/when the connection is interrupted, the Gateway Service will continuously attempt to re-establish the connection to try and ensure that the Manager is able to manage the Gateway. When the Micronets Manager can&rsquo;t be reached, the Gateway will operate with the last settings it applied.</p>
 
@@ -76,21 +74,51 @@
 
 <h2 id="link-s-to-details-on-how-to-build">Link(s) to details on how to build</h2>
 
-<p>Instructions for running/building the Micronet&rsquo;s Gateway Service and building the installable image from source can be found in the Micronet&rsquo;s Gateway source repository.</p>
+<p>Instructions for running/building the Micronet&rsquo;s Gateway Service and building the installable image from source can be found in <a href="https://github.com/cablelabs/micronets-gw">the Micronet&rsquo;s Gateway source repository</a>.</p>
 
 <h2 id="link-s-to-details-on-how-to-deploy">Link(s) to details on how to deploy</h2>
 
-<p>Instructions on installing the Micronet Gateway components - including <a href="https://github.com/cablelabs/micronets-gw/blob/master/README.md#installing-the-debian-package-for-the-micronets-gateway">installation of the Micronets Gateway Debian package</a>, <a href="https://github.com/cablelabs/micronets-gw/blob/master/micronets-gw-service/README.md#dependencies">installation of package dependencies</a>, and configuration of <a href="https://github.com/cablelabs/micronets-gw/blob/master/filesystem/opt/micronets-gw/doc/interfaces.sample">the /etc/network/interfaces file</a> - can be found in the Micronet Gateway source repository.</p>
+<p>The Debian installer (and its dependancies) are in the Cablelabs Artifactory.</p>
+
+<p>For Ubuntu 16.04 LTS, the following dependent packages should be installed:</p>
+
+<ul>
+<li><a href="https://community.cablelabs.com/mvn/micronets-dpkg/pool/libpython3.6-minimal_3.6.5-5~16.04.york1_amd64.deb">libpython3.6-minimal_3.6.5-5~16.04.york1_amd64.deb</a></li>
+<li><a href="https://community.cablelabs.com/mvn/micronets-dpkg/pool/libpython3.6-stdlib_3.6.5-5~16.04.york1_amd64.deb">libpython3.6-stdlib_3.6.5-5~16.04.york1_amd64.deb</a></li>
+<li><a href="https://community.cablelabs.com/mvn/micronets-dpkg/pool/python3.6-minimal_3.6.5-5~16.04.york1_amd64.deb">python3.6-minimal_3.6.5-5~16.04.york1_amd64.deb</a></li>
+<li><a href="https://community.cablelabs.com/mvn/micronets-dpkg/pool/python3.6_3.6.5-5~16.04.york1_amd64.deb">python3.6_3.6.5-5~16.04.york1_amd64.deb</a></li>
+<li><a href="https://community.cablelabs.com/mvn/micronets-dpkg/pool/libopenvswitch_2.9.2-1_amd64.deb">libopenvswitch_2.9.2-1_amd64.deb</a></li>
+<li><a href="https://community.cablelabs.com/mvn/micronets-dpkg/pool/openvswitch-common_2.9.2-1_amd64.deb">openvswitch-common_2.9.2-1_amd64.deb</a></li>
+<li><a href="https://community.cablelabs.com/mvn/micronets-dpkg/pool/openvswitch-switch_2.9.2-1_amd64.deb">openvswitch-switch_2.9.2-1_amd64.deb</a></li>
+</ul>
+
+<p>Note that for Debian releases newer than 16.04, the Python 3.6 packages should not be required.</p>
+
+<p>The Debian package with the Micronets Gateway components can be downloaded from:</p>
+
+<ul>
+<li><a href="https://community.cablelabs.com/mvn/micronets-dpkg/pool/micronets-gw-current.deb">micronets-gw-current.deb</a></li>
+</ul>
+
+<p>Note that support for installation via an apt repository is in-progress. In the meantime, each of the above packages can be downloaded via curl or wget and installed via dpkg. e.g.</p>
+
+<pre><code>wget https://community.cablelabs.com/mvn/micronets-dpkg/pool/micronets-gw-current.deb
+dpkg -i micronets-gw-current.deb
+</code></pre>
+
+<p>After installation of the gateway packages, the gateway&rsquo;s <code>/etc/network/interfaces</code> file needs to be configured according to the gateway&rsquo;s connectivity and installed network interfaces. An
+<a href="https://github.com/cablelabs/micronets-gw/blob/master/filesystem/opt/micronets-gw/doc/interfaces.sample">example /etc/network/interfaces file</a> can be found in the Micronet Gateway source repository.</p>
+
+<p>After the <code>interfaces</code> file is configured, the gateway should be rebooted for the changes to take effect.</p>
 
 <h2 id="link-s-to-api-docs">Link(s) to API docs</h2>
 
 <p>The <a href="https://github.com/cablelabs/micronets-gw/blob/master/micronets-gw-service/README.md#micronets-dhcp-restcrud-interface">Micronet&rsquo;s Gateway Service API</a> is currently documented in the gateway source repository.</p>
 
-
 <div class="edit-meta">
 
 <br><a href="https://github.com/cablelabs/micronets.wiki/edit/master/content/micronets-gateway/_index.md" class="edit-page"><i class="fas fa-pen-square"></i> Edit on GitHub</a></div>
-<nav class="pagination"><a class="nav nav-prev" href="/micronets/getting-started/" title="Getting Started"><i class="fas fa-arrow-left" aria-hidden="true"></i> Prev - Getting Started</a>
+<nav class="pagination"><a class="nav nav-prev" href="/micronets/getting-started/using-docker/" title="Using Docker"><i class="fas fa-arrow-left" aria-hidden="true"></i> Prev - Using Docker</a>
 <a class="nav nav-next" href="/micronets/server-components/" title="Server Components">Next - Server Components <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
 </nav><footer>
 </footer>
@@ -100,6 +128,10 @@
 <li class=""><a href="https://cablelabs.github.io/micronets">Home</a></li>
 
 <li class=""><a href="/micronets/getting-started/">Getting Started</a>
+<ul class="">
+<li class=""><a href="/micronets/getting-started/using-docker/">Using Docker</a></li>
+</ul>
+  
 </li>
 
 <li class="parent active"><a href="/micronets/micronets-gateway/">Micronets Gateway</a>

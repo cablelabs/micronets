@@ -12,91 +12,106 @@
     
     <item>
       <title></title>
-      <link>https://cablelabs.github.io/micronets/microwiki/authorization-server-mso/</link>
+      <link>https://cablelabs.github.io/micronets/externalcontent/micronets.wiki/authorization-server-mso/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://cablelabs.github.io/micronets/microwiki/authorization-server-mso/</guid>
+      <guid>https://cablelabs.github.io/micronets/externalcontent/micronets.wiki/authorization-server-mso/</guid>
       <description>Abstract The Authorization Server is an OAUTH compliant server that is part of the MSO infrastructure. It is used for authentication and authorization functions, the latter implemented as an OAUTH API for granting access tokens.
 Origins The Authorization Server was initially part of IdOra, a project that was originally developed by Bob Lund (CableLabs). This implementation is a derivation of the original codebase, with minor changes required to integrate it into the Micronets ecosystem.</description>
     </item>
     
     <item>
       <title></title>
-      <link>https://cablelabs.github.io/micronets/microwiki/component-doc-template/</link>
+      <link>https://cablelabs.github.io/micronets/externalcontent/micronets.wiki/component-doc-template/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://cablelabs.github.io/micronets/microwiki/component-doc-template/</guid>
+      <guid>https://cablelabs.github.io/micronets/externalcontent/micronets.wiki/component-doc-template/</guid>
       <description> Abstract/What it does How is it instantiated What else does it communicate with (link to other components wiki page) What API&amp;rsquo;s it provides (functionally what does it do, can also link to doc file in the actual repo) Link(s) to details on how to build Link(s) to details on how to deploy Link(s) to API docs (e.g. swagger api&amp;rsquo;s) </description>
     </item>
     
     <item>
       <title></title>
-      <link>https://cablelabs.github.io/micronets/microwiki/docker-deployment-guide/</link>
+      <link>https://cablelabs.github.io/micronets/externalcontent/micronets.wiki/docker-deployment-guide/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://cablelabs.github.io/micronets/microwiki/docker-deployment-guide/</guid>
+      <guid>https://cablelabs.github.io/micronets/externalcontent/micronets.wiki/docker-deployment-guide/</guid>
       <description>Abstract Docker images are created on development/build machines and published to a remote registry. On the deployment side, docker images are pulled from the remote registry, stored in the local registry and then instantiated at runtime as Docker containers.
 Prerequisites  A private registry host, such as Artifactory or GitLab must be setup as place to store the docker images Docker and all dependencies have to be installed on both build and deployment environments  Build Setup In the root directory of the project, create a Dockerfile similar to this:</description>
     </item>
     
     <item>
       <title></title>
-      <link>https://cablelabs.github.io/micronets/microwiki/home/</link>
+      <link>https://cablelabs.github.io/micronets/externalcontent/micronets.wiki/home/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://cablelabs.github.io/micronets/microwiki/home/</guid>
+      <guid>https://cablelabs.github.io/micronets/externalcontent/micronets.wiki/home/</guid>
       <description>What is Micronets CableLabs Micronets is a next generation on-premise networking platform focused on providing adaptive security for all devices connecting to a consumer and/or SMB network and provides dynamic micro-segmentation and management of connectivity to those devices. It is designed to provide seamless and transparent security to the users without burdening them with the technical aspects of configuring the network.</description>
     </item>
     
     <item>
       <title></title>
-      <link>https://cablelabs.github.io/micronets/microwiki/idora-client-mobile-app/</link>
+      <link>https://cablelabs.github.io/micronets/externalcontent/micronets.wiki/identity-server/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://cablelabs.github.io/micronets/microwiki/idora-client-mobile-app/</guid>
+      <guid>https://cablelabs.github.io/micronets/externalcontent/micronets.wiki/identity-server/</guid>
+      <description>Identity Server Abstract/What it does Identity Server is designed to create device specific x.509 certificates using a subscriber root certificate.
+How is it instantiated The Identity Server can be run manually via npm commands or as a Docker container.
+What else does it communicate with The Identity Server communicates with the following Micronets components:
+Micronets Manager  * IN CSR Template Requests on behalf of medical device * IN Certificate Requests on behalf of medical device  Link(s) to details on how to build Instructions for building and running the Identity Server API can be found in the Identity Server API README</description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://cablelabs.github.io/micronets/externalcontent/micronets.wiki/idora-client-mobile-app/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://cablelabs.github.io/micronets/externalcontent/micronets.wiki/idora-client-mobile-app/</guid>
       <description>Abstract The Idora Client is Cordova based multi-platform mobile app used to scan QRCodes for the purposes of logging in to a website without using username/password.
 Developers The repository for the Idora Client is micronets-idora-client
 Overview This application is HTML5 based, built using the Cordova platform. No native code is required, just html, css, and javascript. The application provides for user account management, logging in, and scanning/submitting QRCodes.
-Operation Setup  If the URL of the Idora Server is not what the app was compiled with (see index.</description>
+Messaging The Idora Client communicates with the following Micronets components: * Idora Server + OUT signup/login/logout XHR requests for managing the IdOra User Account + OUT authorize/revoke XHR requests for managing MSO access tokens</description>
     </item>
     
     <item>
       <title></title>
-      <link>https://cablelabs.github.io/micronets/microwiki/idora-server-credential-server/</link>
+      <link>https://cablelabs.github.io/micronets/externalcontent/micronets.wiki/idora-server-credential-server/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://cablelabs.github.io/micronets/microwiki/idora-server-credential-server/</guid>
+      <guid>https://cablelabs.github.io/micronets/externalcontent/micronets.wiki/idora-server-credential-server/</guid>
       <description>Abstract The IdOra Server serves as a custodian of access tokens (credentials) on behalf of a subscriber. The subscriber can authorize IdOra to obtain, store, and present these access tokens to pre-authorized third party services, usually for the purpose of logging the subscriber into a web page by scanning a QRCode or some other non user/password method.
-Origins The IdOra project was originally developed by Bob Lund (CableLabs). This implementation is a derivation of the original codebase, with minor changes required to integrate it into the Micronets ecosystem.</description>
+A web portal is provided for creating accounts, logging in/out, and configuring services for remote logins.</description>
     </item>
     
     <item>
       <title></title>
-      <link>https://cablelabs.github.io/micronets/microwiki/mso-portal-stub/</link>
+      <link>https://cablelabs.github.io/micronets/externalcontent/micronets.wiki/mso-portal-stub/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://cablelabs.github.io/micronets/microwiki/mso-portal-stub/</guid>
+      <guid>https://cablelabs.github.io/micronets/externalcontent/micronets.wiki/mso-portal-stub/</guid>
       <description>Abstract The MSO Portal (Stub) is a placeholder for MSO Portal, used to test the front end components without a functioning backend present.
 Developers The repository for the Authorization Server is micronets-mso-portal-stub
-Overview The MSO Portal (Stub) has the exact same exposed API methods as MSO Portal.
-Operation Required components In addition to MSO Portal Stub, the following components are required to complete the front end test system: * micronets-reg-server * micronets-auth-server * micronets-idora-server (optional, can just click on the QRCode instead of scanning it) * micronets-idora-client (optional, can just click on the QRCode instead of scanning it) * Protomed Device (optional, can just run the following script: `micronets-reg-server/test/scripts/onboardDevice.</description>
+Overview The MSO Portal (Stub) has a subset of the MSO Portal exposed API methods, specifically as pertains to the Authorization Server and the Registration Server.
+Messaging The MSO Portal (Stub) communicates with the following Micronets components: * Registration Server + IN CSR Template Requests on behalf of medical device + IN Certificate Requests on behalf of medical device * Authorization Server + IN Request registration token + IN Request subscriber metadata</description>
     </item>
     
     <item>
       <title></title>
-      <link>https://cablelabs.github.io/micronets/microwiki/mso-portal/</link>
+      <link>https://cablelabs.github.io/micronets/externalcontent/micronets.wiki/mso-portal/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://cablelabs.github.io/micronets/microwiki/mso-portal/</guid>
-      <description>MSO Portal Landing Page</description>
+      <guid>https://cablelabs.github.io/micronets/externalcontent/micronets.wiki/mso-portal/</guid>
+      <description>MSO Portal Abstract/What it does MSO Portal provides 3rd party open-source components for authentication and on-boarding of medical devices for building micronets. Its a ready to use solution which consists of REST API&amp;rsquo;s.
+How is it instantiated The MSO Portal can be run manually via npm commands or as a Docker container.
+What else does it communicate with The MSO Portal communicates with the following Micronets components:
+Micronets Manager  * IN CSR Template Requests on behalf of medical device * IN Certificate Requests on behalf of medical device  Detailed descriptions of the APIs can be found https://github.</description>
     </item>
     
     <item>
       <title></title>
-      <link>https://cablelabs.github.io/micronets/microwiki/micronets-mud-tools/</link>
+      <link>https://cablelabs.github.io/micronets/externalcontent/micronets.wiki/micronets-mud-tools/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://cablelabs.github.io/micronets/microwiki/micronets-mud-tools/</guid>
+      <guid>https://cablelabs.github.io/micronets/externalcontent/micronets.wiki/micronets-mud-tools/</guid>
       <description>What it does The Micronets MUD tools contains utilities for parsing, converting, and manipulating Manufacturer Usage Description (MUD) files - including a MUD Manager that provides REST APIs for operating on MUDs.
 How is it instantiated The MUD Manager can be run as a service either via Linux systemd or as a Docker container.
 What else does it communicate with The MUD Manager is currently used as a utility service for the Micronets Manager - to retrieve MUD files from a passed URI, parse the MUD, and produce host restriction declarations that can be passed to the associated Micronets Gateway Service.</description>
@@ -104,19 +119,20 @@ What else does it communicate with The MUD Manager is currently used as a utilit
     
     <item>
       <title></title>
-      <link>https://cablelabs.github.io/micronets/microwiki/micronets-manager/</link>
+      <link>https://cablelabs.github.io/micronets/externalcontent/micronets.wiki/micronets-manager/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://cablelabs.github.io/micronets/microwiki/micronets-manager/</guid>
-      <description>Micronets Manager Landing Page</description>
+      <guid>https://cablelabs.github.io/micronets/externalcontent/micronets.wiki/micronets-manager/</guid>
+      <description>Abstract/What it does Micronets Manager is an application which controls and orchestrates interaction between various components in micronets platform. It is the critical element that orchestrates all Micronets activities, most notably the creation of rules that manage device connectivity within the home and cable operator network to deliver services.It enables to create / update / view micronets and consists of REST API&amp;rsquo;s and user friendly web interface.
+How is it instantiated The Micronets Manager can be run manually via npm commands or as a Docker container.</description>
     </item>
     
     <item>
       <title></title>
-      <link>https://cablelabs.github.io/micronets/microwiki/onboarding-demo-troubleshooter/</link>
+      <link>https://cablelabs.github.io/micronets/externalcontent/micronets.wiki/onboarding-demo-troubleshooter/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://cablelabs.github.io/micronets/microwiki/onboarding-demo-troubleshooter/</guid>
+      <guid>https://cablelabs.github.io/micronets/externalcontent/micronets.wiki/onboarding-demo-troubleshooter/</guid>
       <description>Things to check when the demo doesn&amp;rsquo;t work. This is broken into two sections - the front end user experience and the back end network provisioning.
 Front End (clinic browser) Here for things related to getting the certificates installed on the device (was the device able to receive and install the certificate?)
 All Machines (VMs)  /etc/hosts file if not using DNS /etc/micronets/docker-update script  Ensure URLS and ports are correct  /etc/nginx/sites-enabled/*  Check virtual host files for correct proxy-pass entries   ProtoMed Device  Check red power switch on side of device and power on with red button.</description>
@@ -124,20 +140,20 @@ All Machines (VMs)  /etc/hosts file if not using DNS /etc/micronets/docker-updat
     
     <item>
       <title></title>
-      <link>https://cablelabs.github.io/micronets/microwiki/protomed-device-user-manual/</link>
+      <link>https://cablelabs.github.io/micronets/externalcontent/micronets.wiki/protomed-device-user-manual/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://cablelabs.github.io/micronets/microwiki/protomed-device-user-manual/</guid>
-      <description>Abstract ProtoMed is a faux medical device that can be used to demonstrate the onboarding process for a medical device. It consists of a Raspberry Pi Zero W, an OLED display, a Powerboost 500 charge unit, a 3.7v battery, and a variety of switches and discrete electronic components.
+      <guid>https://cablelabs.github.io/micronets/externalcontent/micronets.wiki/protomed-device-user-manual/</guid>
+      <description>Abstract Protomed is a faux medical device that can be used to demonstrate the onboarding process for a medical device. It consists of a Raspberry Pi Zero W, an OLED display, a Powerboost 500 charge unit, a 3.7v battery, and a variety of switches and discrete electronic components.
 Developers The repository for the Protomed device is micronets-pi. In addition to the source code, it includes device construction details, a bill of materials and 3D printable STL files for the plastic case.</description>
     </item>
     
     <item>
       <title></title>
-      <link>https://cablelabs.github.io/micronets/microwiki/qrcode-scanner-operation/</link>
+      <link>https://cablelabs.github.io/micronets/externalcontent/micronets.wiki/qrcode-scanner-operation/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://cablelabs.github.io/micronets/microwiki/qrcode-scanner-operation/</guid>
+      <guid>https://cablelabs.github.io/micronets/externalcontent/micronets.wiki/qrcode-scanner-operation/</guid>
       <description>Abstract This document describes QRCode scanning to authorize an MSO subscriber (in this case, onboarding a medical device onto the subscriber&amp;rsquo;s WiFi network.)
 Application Source code for this application is in the micronets-idora-client repository. It is a multi-platform mobile application written using the Cordova framework.
 Required Servers The following servers are required to setup an IdOra account and link it to an MSO&amp;rsquo;s Micronets applications - micronets-auth-server - micronets-idora-server</description>
@@ -145,10 +161,10 @@ Required Servers The following servers are required to setup an IdOra account an
     
     <item>
       <title></title>
-      <link>https://cablelabs.github.io/micronets/microwiki/registration-server-clinic/</link>
+      <link>https://cablelabs.github.io/micronets/externalcontent/micronets.wiki/registration-server-clinic/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://cablelabs.github.io/micronets/microwiki/registration-server-clinic/</guid>
+      <guid>https://cablelabs.github.io/micronets/externalcontent/micronets.wiki/registration-server-clinic/</guid>
       <description>Abstract This is a public facing server prototype that could be used by medical facilities (e.g. clinics) to effect the frictionless onboarding of a medical device to an MSO subscriber&amp;rsquo;s account. Specifically, it facilitates the installation of the credentials required to connect the device to the subscriber&amp;rsquo;s WiFi network.
 Developers The repository for the Registration Server is micronets-reg-server
 Overview The Registration Server provides a web portal for clinic staff to manage the device onboarding process.</description>
@@ -156,21 +172,30 @@ Overview The Registration Server provides a web portal for clinic staff to manag
     
     <item>
       <title></title>
-      <link>https://cablelabs.github.io/micronets/microwiki/the-micronets-gateway/</link>
+      <link>https://cablelabs.github.io/micronets/externalcontent/micronets.wiki/the-micronets-gateway/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://cablelabs.github.io/micronets/microwiki/the-micronets-gateway/</guid>
+      <guid>https://cablelabs.github.io/micronets/externalcontent/micronets.wiki/the-micronets-gateway/</guid>
       <description>The Micronets Gateway Abstract/What it does The Micronets Gateway incorporates a number of components necessary for creating and managing Micronets on the gateway - and for enforcing the Micronets policy. For example, when the Micronets Manager creates a Micronet and provisions a device on it using the Gateway Service API, the gateway on-boards the device onto the wireless network, provides the device its IP address when it joins the network, and ensures the device can only communicate according to the device-level and Micronet-level policy.</description>
     </item>
     
     <item>
       <title></title>
-      <link>https://cablelabs.github.io/micronets/microwiki/the-micronets-websocket-proxy/</link>
+      <link>https://cablelabs.github.io/micronets/externalcontent/micronets.wiki/the-micronets-websocket-proxy/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://cablelabs.github.io/micronets/microwiki/the-micronets-websocket-proxy/</guid>
+      <guid>https://cablelabs.github.io/micronets/externalcontent/micronets.wiki/the-micronets-websocket-proxy/</guid>
       <description>Abstract/What it does The Micronets Websocket Proxy allows peers to establish a secure end-to-end websocket channel by connecting to a common URI on the Proxy. This allows two peers to rendezvous and communicate without exposing any interfaces or ports. Authentication is currently performed using client certificate validation. And the proxy can support as many connections as the host system can support.
 Proxy clients are authenticated using X.509 client certificates provided in the secure websocket TLS exchange.</description>
+    </item>
+    
+    <item>
+      <title>Using Docker</title>
+      <link>https://cablelabs.github.io/micronets/getting-started/using-docker/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://cablelabs.github.io/micronets/getting-started/using-docker/</guid>
+      <description>This is where info regarding docker based installation will go.</description>
     </item>
     
   </channel>

@@ -1,6 +1,5 @@
 hugo/themes
-hugo/content/externalContent
-resources
 hugo/resources
-
+resources
+docs/externalContent
 
