@@ -1,3 +1,6 @@
-hugo/themes/
-docs/microwiki/
+hugo/themes
+hugo/content/externalContent
+resources
+hugo/resources
+
 

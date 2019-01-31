@@ -16,9 +16,11 @@ defaultContentLanguage = "en"
 defaultContentLanguageInSubdir= false
 enableMissingTranslationPlaceholders = false
 
+ignoreFiles = ["externalContent"]
+
 [Params]
     # Souce Code repository section
-    description = "Developer documentation site for CableLabs Micronets"
+    description = "Developer documentation for CableLabs Micronets"
     github_repository = "https://github.com/cablelabs/micronets"
     #version = "0.2.1"
 
@@ -38,6 +40,9 @@ enableMissingTranslationPlaceholders = false
     # path name excluded from documentation menu
     menu_exclusion = ["archives", "blog", "entry", "post", "posts", "microwiki"]
 
+    # Added as part of the includeFile shortcode. See the documentation in the includeFile.html
+    includes_dir = ""
+
 
 # Global menu section
 [[menu.main]]
@@ -46,7 +51,7 @@ enableMissingTranslationPlaceholders = false
     weight = 1
 
 [[menu.main]]
-    name = "About CableLabs"
-    url = "https://www.cablelabs.com"
+    name = "About Micronets"
+    url = "https://www.cablelabs.com/micronets"
     weight = 8
 ## --  End config of techdoc

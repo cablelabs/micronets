@@ -1,3 +1,20 @@
-{{ $file := .Get "file" | readFile }}
-{{ $lang := .Get "language" }}
-{{ (print "\n" $file "\n") | markdownify }}
+<!--
+  This shortcode allows including the content of one file into another.
+  Currently it has only been tested with Markdown files
+  In order for this to work correctly, please add the following setting
+  in your config file.
+  [Params]
+      includes_dir = ""
+
+  You may set the value of the includes_dir above to whichever folder
+  you want to be the root for your  included files.
+  To override the includes_dir for a specific content file, you can
+  add the include_dir (note the singular spelling) in the meta
+  of the specific content file.
+-->
+{{- $includes_dir := (.Get "include_dir") | default .Site.Params.includes_dir -}}
+{{- $include_file := printf "%s/%s" $includes_dir (.Get "file") -}}
+
+{{- with .Site.GetPage $include_file -}}
+  {{- .Content | markdownify -}}
+{{- end -}}

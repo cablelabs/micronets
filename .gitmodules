@@ -1,6 +1,3 @@
-[submodule "hugo/content/microwiki"]
-	path = hugo/content/microwiki
-	url = https://github.com/cablelabs/micronets.wiki.git
 [submodule "hugo/themes/techdoc"]
 	path = hugo/themes/techdoc
 	url = https://github.com/thingsym/hugo-theme-techdoc
