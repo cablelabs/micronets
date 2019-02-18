@@ -5,7 +5,7 @@ title = "CableLabs Micronets"
 publishDir =  "../docs"
 theme = "techdoc"
 
-## -- Config parameters for techdoc theme
+##-- techdoc theme menu configuration --##
 hasCJKLanguage = true
 metaDataFormat = "yaml"
 
@@ -16,9 +16,23 @@ defaultContentLanguage = "en"
 defaultContentLanguageInSubdir= false
 enableMissingTranslationPlaceholders = false
 
+# Global menu section
+[[menu.main]]
+    name = "Micronets Home"
+    url = "/"
+    weight = 1
+
+[[menu.main]]
+    name = "About Micronets"
+    url = "https://www.cablelabs.com/micronets"
+    weight = 8
+##--  end techdoc --##
+
 #ignoreFiles = ["externalContent"]
 
 [Params]
+
+    ##-- techdoc theme params configuration --##
     # Souce Code repository section
     description = "Developer documentation for CableLabs Micronets"
     github_repository = "https://github.com/cablelabs/micronets"
@@ -26,7 +40,7 @@ enableMissingTranslationPlaceholders = false
 
     # Documentation repository section
     # documentation repository (set edit link to documentation repository)
-    github_doc_repository = "https://github.com/cablelabs/micronets.wiki"
+    #github_doc_repository = "https://github.com/cablelabs/micronets.wiki"
 
     # Analytic section
     #google_analytics_id = "" # Your Google Analytics tracking id
@@ -39,19 +53,9 @@ enableMissingTranslationPlaceholders = false
 
     # path name excluded from documentation menu
     menu_exclusion = ["archives", "externalContent"]
+    ##-- end techdoc --##
 
+    ##-- includeFile Shortcode configuration --##
     # Added as part of the includeFile shortcode. See the documentation in the includeFile.html
     includes_dir = "externalContent"
-
-
-# Global menu section
-[[menu.main]]
-    name = "Home"
-    url = "/"
-    weight = 1
-
-[[menu.main]]
-    name = "About Micronets"
-    url = "https://www.cablelabs.com/micronets"
-    weight = 8
-## --  End config of techdoc
+    ##-- end includeFile --##
