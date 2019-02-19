@@ -3,11 +3,11 @@
 <head><meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<title>Server Components - CableLabs Micronets</title>
+<title>MSO Portal - CableLabs Micronets</title>
 <meta name="description" content="Developer documentation for CableLabs Micronets">
 <meta name="generator" content="Hugo 0.54.0" />
 <link href="https://cablelabs.github.io/micronetsindex.xml" rel="alternate" type="application/rss+xml">
-<link rel="canonical" href="https://cablelabs.github.io/micronets/server-components/">
+<link rel="canonical" href="https://cablelabs.github.io/micronets/server-components/mso-portal/">
 <link rel="stylesheet" href="https://cablelabs.github.io/micronets/css/theme.min.css">
 <script src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
 <link rel="stylesheet" href="https://cablelabs.github.io/micronets/css/chroma.min.css">
@@ -30,31 +30,49 @@
 </nav>
 </div>
 <div class="content-container">
-<main><div id="breadcrumbs">
-    <a href="/">Home</a>
-    
-        
-    
-        
-            > <a href="/micronets">Micronets</a>
-        
-    
-        
-            > <a href="/server-components">Server components</a>
-        
-    
-        
-    
-</div>
-<p>These sections describe the various server components that can be used to manage Micronets and associated devices.</p>
+<main><h1>MSO Portal</h1><h1 id="mso-portal">MSO Portal</h1>
 
-<p>These components are deployable in a variety of ways to facilitate subscriber management and device provisioning
-- including device- and service-specific use cases.</p>
+<h2 id="abstract-what-it-does">Abstract/What it does</h2>
+
+<p>MSO Portal provides 3rd party open-source components for authentication and on-boarding of medical devices for building micronets. Its a ready to use solution which consists of REST API&rsquo;s.</p>
+
+<h2 id="how-is-it-instantiated">How is it instantiated</h2>
+
+<p>The MSO Portal can be run manually <a href="https://github.com/cablelabs/micronets-mso-portal#11-running-the-mso-portal-manually">via npm commands</a> or <a href="https://github.com/cablelabs/micronets-mso-portal#12-running-the-mso-portal-using-docker">as a Docker container</a>.</p>
+
+<h2 id="what-else-does-it-communicate-with">What else does it communicate with</h2>
+
+<p>The MSO Portal communicates with the following Micronets components:</p>
+
+<h3 id="micronets-manager">Micronets Manager</h3>
+
+<pre><code>   * IN CSR Template Requests on behalf of medical device
+   * IN Certificate Requests on behalf of medical device
+</code></pre>
+
+<p>Detailed descriptions of the APIs can be found <a href="https://github.com/cablelabs/micronets-mso-portal/blob/master/README.md#api">https://github.com/cablelabs/micronets-mso-portal/blob/master/README.md#api</a></p>
+
+<h2 id="what-apis-it-provides">What APIs it provides</h2>
+
+<h2 id="link-s-to-details-on-how-to-build">Link(s) to details on how to build</h2>
+
+<p>Instructions for building and running the MSO Portal API <a href="https://github.com/cablelabs/micronets-mso-portal/blob/master/README.md#getting-started">can be found in the MSO Portal API README</a></p>
+
+<h2 id="link-s-to-details-on-how-to-deploy">Link(s) to details on how to deploy</h2>
+
+<p>Detailed instructions for deploying the MSO Portal can be found [here](Detailed instructions for deploying the Micronets manager can be found <a href="https://github.com/cablelabs/micronets-mso-portal#12-running-the-mso-portal-using-docker">here</a></p>
+
+<h2 id="link-s-to-api-docs">Link(s) to API docs</h2>
+
+<p>The [MSO Portal API] is currently documented in the source repository.
+ * Swagger Docs : (<a href="https://github.com/cablelabs/micronets-mso-portal/blob/master/docs/swagger/MSO_PORTAL_Open_api_3.0.json">https://github.com/cablelabs/micronets-mso-portal/blob/master/docs/swagger/MSO_PORTAL_Open_api_3.0.json</a>)
+*  Github Docs : (<a href="https://github.com/cablelabs/micronets-mso-portal/blob/master/README.md#api">https://github.com/cablelabs/micronets-mso-portal/blob/master/README.md#api</a>)</p>
+
 <div class="edit-meta">
 
 <br></div>
-<nav class="pagination"><a class="nav nav-prev" href="/micronets/micronets-gateway/example-interfaces-file/" title="Example /etc/network/interfaces"><i class="fas fa-arrow-left" aria-hidden="true"></i> Prev - Example /etc/network/interfaces</a>
-<a class="nav nav-next" href="/micronets/server-components/micronets-manager/" title="Micronets Manager">Next - Micronets Manager <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
+<nav class="pagination"><a class="nav nav-prev" href="/micronets/server-components/identity-server/" title="Identity Server"><i class="fas fa-arrow-left" aria-hidden="true"></i> Prev - Identity Server</a>
+<a class="nav nav-next" href="/micronets/server-components/registration-server/" title="Registration Server">Next - Registration Server <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
 </nav><footer>
 </footer>
 </main><div class="sidebar">
@@ -72,11 +90,11 @@
   
 </li>
 
-<li class="parent active"><a href="/micronets/server-components/">Server Components</a>
+<li class="parent"><a href="/micronets/server-components/">Server Components</a>
 <ul class="sub-menu">
 <li class=""><a href="/micronets/server-components/micronets-manager/">Micronets Manager</a></li>
 <li class=""><a href="/micronets/server-components/identity-server/">Identity Server</a></li>
-<li class=""><a href="/micronets/server-components/mso-portal/">MSO Portal</a></li>
+<li class="active"><a href="/micronets/server-components/mso-portal/">MSO Portal</a></li>
 <li class=""><a href="/micronets/server-components/registration-server/">Registration Server</a></li>
 <li class=""><a href="/micronets/server-components/auth-server/">Authorization Server</a></li>
 <li class=""><a href="/micronets/server-components/idora-server/">Idora Server</a></li>

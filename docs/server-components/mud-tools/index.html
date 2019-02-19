@@ -3,11 +3,11 @@
 <head><meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<title>Server Components - CableLabs Micronets</title>
+<title>MUD Services - CableLabs Micronets</title>
 <meta name="description" content="Developer documentation for CableLabs Micronets">
 <meta name="generator" content="Hugo 0.54.0" />
 <link href="https://cablelabs.github.io/micronetsindex.xml" rel="alternate" type="application/rss+xml">
-<link rel="canonical" href="https://cablelabs.github.io/micronets/server-components/">
+<link rel="canonical" href="https://cablelabs.github.io/micronets/server-components/mud-tools/">
 <link rel="stylesheet" href="https://cablelabs.github.io/micronets/css/theme.min.css">
 <script src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
 <link rel="stylesheet" href="https://cablelabs.github.io/micronets/css/chroma.min.css">
@@ -30,31 +30,31 @@
 </nav>
 </div>
 <div class="content-container">
-<main><div id="breadcrumbs">
-    <a href="/">Home</a>
-    
-        
-    
-        
-            > <a href="/micronets">Micronets</a>
-        
-    
-        
-            > <a href="/server-components">Server components</a>
-        
-    
-        
-    
-</div>
-<p>These sections describe the various server components that can be used to manage Micronets and associated devices.</p>
+<main><h1>MUD Services</h1><h2 id="what-it-does">What it does</h2>
 
-<p>These components are deployable in a variety of ways to facilitate subscriber management and device provisioning
-- including device- and service-specific use cases.</p>
+<p>The Micronets MUD tools contains utilities for parsing, converting, and manipulating Manufacturer Usage Description (MUD) files - including a MUD Manager that provides REST APIs for operating on MUDs.</p>
+
+<h2 id="how-is-it-instantiated">How is it instantiated</h2>
+
+<p>The MUD Manager can be run as a service either <a href="https://github.com/cablelabs/micronets-mud-tools#12-running-the-mud-manager-using-systemd">via Linux systemd</a> or <a href="https://github.com/cablelabs/micronets-mud-tools#13-running-the-mud-manager-using-docker">as a Docker container</a>.</p>
+
+<h2 id="what-else-does-it-communicate-with">What else does it communicate with</h2>
+
+<p>The MUD Manager is currently used as a utility service for the <a href="https://github.com/cablelabs/micronets-manager/blob/micronets-manager-integration/README.md">Micronets Manager</a> - to retrieve MUD files from a passed URI, parse the MUD, and produce host restriction declarations that can be passed to the associated <a href="https://github.com/cablelabs/micronets-gw/blob/master/README.md">Micronets Gateway Service</a>.</p>
+
+<h2 id="how-to-build">How to build</h2>
+
+<p>Instructions for building and running the MUD Manager can be found <a href="https://github.com/cablelabs/micronets-mud-tools#11-running-the-mud-manager-manually">in the MUD Tools README</a></p>
+
+<h2 id="how-to-deploy">How to deploy</h2>
+
+<p>Instructions for deploying the MUD Manager to Artifactory can be found <a href="https://github.com/cablelabs/micronets-mud-tools#163-deploying-a-docker-image-to-artifactory">in the MUD Tools README</a></p>
+
 <div class="edit-meta">
 
 <br></div>
-<nav class="pagination"><a class="nav nav-prev" href="/micronets/micronets-gateway/example-interfaces-file/" title="Example /etc/network/interfaces"><i class="fas fa-arrow-left" aria-hidden="true"></i> Prev - Example /etc/network/interfaces</a>
-<a class="nav nav-next" href="/micronets/server-components/micronets-manager/" title="Micronets Manager">Next - Micronets Manager <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
+<nav class="pagination"><a class="nav nav-prev" href="/micronets/server-components/idora-server/" title="Idora Server"><i class="fas fa-arrow-left" aria-hidden="true"></i> Prev - Idora Server</a>
+<a class="nav nav-next" href="/micronets/server-components/websocket-proxy/" title="Websocket Proxy">Next - Websocket Proxy <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
 </nav><footer>
 </footer>
 </main><div class="sidebar">
@@ -72,7 +72,7 @@
   
 </li>
 
-<li class="parent active"><a href="/micronets/server-components/">Server Components</a>
+<li class="parent"><a href="/micronets/server-components/">Server Components</a>
 <ul class="sub-menu">
 <li class=""><a href="/micronets/server-components/micronets-manager/">Micronets Manager</a></li>
 <li class=""><a href="/micronets/server-components/identity-server/">Identity Server</a></li>
@@ -80,7 +80,7 @@
 <li class=""><a href="/micronets/server-components/registration-server/">Registration Server</a></li>
 <li class=""><a href="/micronets/server-components/auth-server/">Authorization Server</a></li>
 <li class=""><a href="/micronets/server-components/idora-server/">Idora Server</a></li>
-<li class=""><a href="/micronets/server-components/mud-tools/">MUD Services</a></li>
+<li class="active"><a href="/micronets/server-components/mud-tools/">MUD Services</a></li>
 <li class=""><a href="/micronets/server-components/websocket-proxy/">Websocket Proxy</a></li>
 <li class=""><a href="/micronets/server-components/using-docker/">Using Docker</a></li>
 </ul>

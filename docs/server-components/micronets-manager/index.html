@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<title>Micronets Manager - CableLabs Micronets</title>
+<meta name="description" content="Developer documentation for CableLabs Micronets">
+<meta name="generator" content="Hugo 0.54.0" />
+<link href="https://cablelabs.github.io/micronetsindex.xml" rel="alternate" type="application/rss+xml">
+<link rel="canonical" href="https://cablelabs.github.io/micronets/server-components/micronets-manager/">
+<link rel="stylesheet" href="https://cablelabs.github.io/micronets/css/theme.min.css">
+<script src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
+<link rel="stylesheet" href="https://cablelabs.github.io/micronets/css/chroma.min.css">
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+<script src="https://cablelabs.github.io/micronets/js/functions.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery.easing@1.4.1/jquery.easing.min.js"></script>
+<script src="https://cablelabs.github.io/micronets/js/jquery.backtothetop/jquery.backtothetop.min.js"></script></head>
+<body>
+<div class="container"><header>
+<h1>CableLabs Micronets</h1>
+<a href="https://github.com/cablelabs/micronets" class="github"><i class="fab fa-github"></i></a>
+<p class="description">Developer documentation for CableLabs Micronets</p>
+
+</header>
+<div class="menu">
+<nav>
+<ul>
+<li><a href="/micronets/">Micronets Home</a></li>
+<li><a href="https://www.cablelabs.com/micronets">About Micronets</a></li></ul>
+</nav>
+</div>
+<div class="content-container">
+<main><h1>Micronets Manager</h1><h2 id="abstract-what-it-does">Abstract/What it does</h2>
+
+<p>Micronets Manager is an application which controls and orchestrates interaction between various components in micronets platform. It is the critical element that orchestrates all Micronets activities, most notably the creation of rules that manage device connectivity within the home and cable operator network to deliver services.It enables to create / update / view micronets and consists of REST API&rsquo;s and user friendly web interface.</p>
+
+<h2 id="how-is-it-instantiated">How is it instantiated</h2>
+
+<p>The Micronets Manager can be run manually <a href="https://github.com/cablelabs/micronets-manager/blob/micronets-manager-integration/README.md#11-running-the-micronets-manager-manually">via npm commands</a> or <a href="https://github.com/cablelabs/micronets-manager/blob/micronets-manager-integration/README.md#12-running-the-micronets-manager-using-docker">as a Docker container</a>.</p>
+
+<h2 id="what-else-does-it-communicate-with">What else does it communicate with</h2>
+
+<p>The Micronets Manager communicates with the following Micronets components:</p>
+
+<h3 id="mso-portal">MSO Portal</h3>
+
+<pre><code>   * IN CSR Template Requests on behalf of medical device
+   * IN Certificate Requests on behalf of medical device
+</code></pre>
+
+<h3 id="mud-tools">MUD Tools</h3>
+
+<pre><code>   * IN Request MUD parsing for medical device
+</code></pre>
+
+<h3 id="micronets-websocket-proxy">Micronets Websocket Proxy</h3>
+
+<pre><code>   * IN Request to setup device-to-address mappings
+   * IN Request to receive lease notifications
+</code></pre>
+
+<p>Detailed descriptions of the APIs can be found <a href="https://github.com/cablelabs/micronets-manager/tree/micronets-manager-integration/api#api">https://github.com/cablelabs/micronets-manager/tree/micronets-manager-integration/api#api</a></p>
+
+<h2 id="what-apis-it-provides">What APIs it provides</h2>
+
+<p>Micronets Manager API&rsquo;s orchestrate the overall services delivery to the devices and ultimately to the
+user. Several micro services are engaged and managed by the Micronets Manager (e.g., SDN controller, DHCP, DNS,
+AAA/identity servers).</p>
+
+<h2 id="link-s-to-details-on-how-to-build">Link(s) to details on how to build</h2>
+
+<p>Instructions for building and running the Micronets Manager API <a href="https://github.com/cablelabs/micronets-manager/blob/micronets-manager-integration/README.md#getting-started">can be found in the Micronets Manager API README</a></p>
+
+<p>Instructions for building and running the Micronets Manager web client <a href="https://github.com/cablelabs/micronets-manager/blob/micronets-manager-integration/app/README.md">can be found in the Micronets Manager client README</a></p>
+
+<h2 id="link-s-to-details-on-how-to-deploy">Link(s) to details on how to deploy</h2>
+
+<p>Detailed instructions for deploying the Micronets manager can be found <a href="https://github.com/cablelabs/micronets-manager#12-running-the-micronets-manager-using-docker">here</a></p>
+
+<h2 id="link-s-to-api-docs">Link(s) to API docs</h2>
+
+<p>The Micronet Manager API&rsquo;s is currently documented in the source repository.
+Swagger Documentation : <a href="https://github.com/cablelabs/micronets-manager/tree/micronets-manager-integration/docs/swagger">Swagger Docs</a>.<br />
+Github Documentation : <a href="https://github.com/cablelabs/micronets-manager/tree/micronets-manager-integration/api#api">Github Documentation</a>.</p>
+
+<div class="edit-meta">
+
+<br></div>
+<nav class="pagination"><a class="nav nav-prev" href="/micronets/server-components/" title="Server Components"><i class="fas fa-arrow-left" aria-hidden="true"></i> Prev - Server Components</a>
+<a class="nav nav-next" href="/micronets/server-components/identity-server/" title="Identity Server">Next - Identity Server <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
+</nav><footer>
+</footer>
+</main><div class="sidebar">
+<nav>
+<ul>
+<li class=""><a href="https://cablelabs.github.io/micronets">Home</a></li>
+
+<li class=""><a href="/micronets/getting-started/">Getting Started</a>
+</li>
+
+<li class=""><a href="/micronets/micronets-gateway/">Micronets Gateway</a>
+<ul class="">
+<li class=""><a href="/micronets/micronets-gateway/example-interfaces-file/">Example /etc/network/interfaces</a></li>
+</ul>
+  
+</li>
+
+<li class="parent"><a href="/micronets/server-components/">Server Components</a>
+<ul class="sub-menu">
+<li class="active"><a href="/micronets/server-components/micronets-manager/">Micronets Manager</a></li>
+<li class=""><a href="/micronets/server-components/identity-server/">Identity Server</a></li>
+<li class=""><a href="/micronets/server-components/mso-portal/">MSO Portal</a></li>
+<li class=""><a href="/micronets/server-components/registration-server/">Registration Server</a></li>
+<li class=""><a href="/micronets/server-components/auth-server/">Authorization Server</a></li>
+<li class=""><a href="/micronets/server-components/idora-server/">Idora Server</a></li>
+<li class=""><a href="/micronets/server-components/mud-tools/">MUD Services</a></li>
+<li class=""><a href="/micronets/server-components/websocket-proxy/">Websocket Proxy</a></li>
+<li class=""><a href="/micronets/server-components/using-docker/">Using Docker</a></li>
+</ul>
+  
+</li>
+
+<li class=""><a href="/micronets/test-components/">Test Components</a>
+<ul class="">
+<li class=""><a href="/micronets/test-components/idora-client/">Idora Client App</a></li>
+<li class=""><a href="/micronets/test-components/qr-code-scanner/">QR Code Scanner</a></li>
+<li class=""><a href="/micronets/test-components/protomed-device/">ProtoMed Device</a></li>
+</ul>
+  
+</li>
+
+
+</ul>
+</nav>
+
+
+<div class="sidebar-footer"></div>
+</div>
+</div><a href="#" id="backtothetop-fixed" class="backtothetop"
+ data-backtothetop-duration="600"
+ data-backtothetop-easing="easeOutQuart"
+ data-backtothetop-fixed-fadeIn="1000"
+ data-backtothetop-fixed-fadeOut="1000"
+ data-backtothetop-fixed-bottom="10"
+ data-backtothetop-fixed-right="20">
+<span class="fa-layers fa-fw">
+<i class="fas fa-circle"></i>
+<i class="fas fa-arrow-circle-up"></i>
+</span></a>
+</div>
+</body>
+</html>

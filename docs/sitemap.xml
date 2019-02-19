@@ -7,11 +7,67 @@
   </url>
   
   <url>
+    <loc>https://cablelabs.github.io/micronets/test-components/idora-client/</loc>
+  </url>
+  
+  <url>
+    <loc>https://cablelabs.github.io/micronets/server-components/micronets-manager/</loc>
+  </url>
+  
+  <url>
+    <loc>https://cablelabs.github.io/micronets/test-components/qr-code-scanner/</loc>
+  </url>
+  
+  <url>
     <loc>https://cablelabs.github.io/micronets/micronets-gateway/</loc>
   </url>
   
   <url>
+    <loc>https://cablelabs.github.io/micronets/micronets-gateway/example-interfaces-file/</loc>
+  </url>
+  
+  <url>
+    <loc>https://cablelabs.github.io/micronets/server-components/identity-server/</loc>
+  </url>
+  
+  <url>
     <loc>https://cablelabs.github.io/micronets/server-components/</loc>
+  </url>
+  
+  <url>
+    <loc>https://cablelabs.github.io/micronets/server-components/mso-portal/</loc>
+  </url>
+  
+  <url>
+    <loc>https://cablelabs.github.io/micronets/test-components/protomed-device/</loc>
+  </url>
+  
+  <url>
+    <loc>https://cablelabs.github.io/micronets/test-components/</loc>
+  </url>
+  
+  <url>
+    <loc>https://cablelabs.github.io/micronets/server-components/registration-server/</loc>
+  </url>
+  
+  <url>
+    <loc>https://cablelabs.github.io/micronets/server-components/auth-server/</loc>
+  </url>
+  
+  <url>
+    <loc>https://cablelabs.github.io/micronets/server-components/idora-server/</loc>
+  </url>
+  
+  <url>
+    <loc>https://cablelabs.github.io/micronets/server-components/mud-tools/</loc>
+  </url>
+  
+  <url>
+    <loc>https://cablelabs.github.io/micronets/server-components/websocket-proxy/</loc>
+  </url>
+  
+  <url>
+    <loc>https://cablelabs.github.io/micronets/server-components/using-docker/</loc>
   </url>
   
   <url>
@@ -99,10 +155,6 @@
   <url>
     <loc>https://cablelabs.github.io/micronets/tags/</loc>
     <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://cablelabs.github.io/micronets/getting-started/using-docker/</loc>
   </url>
   
 </urlset>

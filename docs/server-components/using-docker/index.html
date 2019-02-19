@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<title>Using Docker - CableLabs Micronets</title>
+<meta name="description" content="Developer documentation for CableLabs Micronets">
+<meta name="generator" content="Hugo 0.54.0" />
+<link href="https://cablelabs.github.io/micronetsindex.xml" rel="alternate" type="application/rss+xml">
+<link rel="canonical" href="https://cablelabs.github.io/micronets/server-components/using-docker/">
+<link rel="stylesheet" href="https://cablelabs.github.io/micronets/css/theme.min.css">
+<script src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
+<link rel="stylesheet" href="https://cablelabs.github.io/micronets/css/chroma.min.css">
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+<script src="https://cablelabs.github.io/micronets/js/functions.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery.easing@1.4.1/jquery.easing.min.js"></script>
+<script src="https://cablelabs.github.io/micronets/js/jquery.backtothetop/jquery.backtothetop.min.js"></script></head>
+<body>
+<div class="container"><header>
+<h1>CableLabs Micronets</h1>
+<a href="https://github.com/cablelabs/micronets" class="github"><i class="fab fa-github"></i></a>
+<p class="description">Developer documentation for CableLabs Micronets</p>
+
+</header>
+<div class="menu">
+<nav>
+<ul>
+<li><a href="/micronets/">Micronets Home</a></li>
+<li><a href="https://www.cablelabs.com/micronets">About Micronets</a></li></ul>
+</nav>
+</div>
+<div class="content-container">
+<main><h1>Using Docker</h1><h2 id="abstract">Abstract</h2>
+
+<p>Docker images are created on development/build machines and published to a remote registry. On the deployment side, docker images are pulled from the remote registry, stored in the local registry and then instantiated at runtime as Docker containers.</p>
+
+<h2 id="prerequisites">Prerequisites</h2>
+
+<ul>
+<li>A private registry host, such as <strong>Artifactory</strong> or <strong>GitLab</strong> must be setup as place to store the docker images</li>
+<li>Docker and all dependencies have to be installed on both build and deployment environments</li>
+</ul>
+
+<h2 id="build-setup">Build Setup</h2>
+
+<p>In the root directory of the project, create a Dockerfile similar to this:</p>
+
+<pre><code>FROM node:8
+
+# Create app directory
+WORKDIR /usr/src/app
+
+# Install app dependencies
+COPY package.json .
+COPY package.json package-lock.json ./
+
+ENV mso_portal_url=&quot;http://localhost:3010&quot;
+
+RUN npm install
+
+# Bundle app source
+COPY . .
+
+EXPOSE 3000
+CMD [ &quot;npm&quot;, &quot;start&quot; ]
+</code></pre>
+
+<p>Build the Docker image. It will be stored in your local Docker registry.</p>
+
+<p><code>docker build -t community.cablelabs.com:4567/micronets-docker/micronets-reg-server .</code></p>
+
+<p>Publish the Docker image to your remote registry.</p>
+
+<p><code>docker login community.cablelabs.com:4567; docker push community.cablelabs.com:4567/micronets-docker/micronets-reg-server</code></p>
+
+<h2 id="deployment">Deployment</h2>
+
+<p>Docker containers can be named at runtime. Doing so will ensure that the container created with <code>docker run</code> can be stopped and restarted using the name given to the container. It also allows the container to be started and stopped using the standard unix <code>systemd</code> facility.</p>
+
+<h3 id="docker-image-installation">Docker image installation</h3>
+
+<p>To download a Docker image from a remote repository, use the <code>docker pull</code> command:</p>
+
+<pre><code># Log in with your remote registry credentials
+docker login
+
+# Retrieve the image
+docker pull community.cablelabs.com:4567/micronets-docker/micronets-reg-server:latest`
+
+# Remove the container first, if it exists (cannot create a named container with the same name)
+docker rm -f micronets-reg-server
+
+# Run the image (create a container) and give it a name.
+docker run -d --name=micronets-reg-server -e someenv -p 3000:3000 community.cablelabs.com:4567/micronets-docker/micronets-reg-server:latest
+</code></pre>
+
+<h3 id="create-a-systemd-configuration-file">Create a systemd configuration file</h3>
+
+<p>This will ensure that your Docker container will start every time the system reboots.
+Add a configuration file: <code>/etc/systemd/system/micronets-reg-server.service</code></p>
+
+<pre><code>[Unit]
+Description=Micronets Registration Server Container
+Requires=docker.service
+After=docker.service
+
+[Service]
+Restart=always
+RestartSec=5
+ExecStart=/usr/bin/docker start -a micronets-reg-server
+ExecStop=/usr/bin/docker stop -t 2 micronets-reg-server
+ExecRestart=/usr/bin/docker restart -t 2 micronets-reg-server
+
+[Install]
+WantedBy=default.target
+</code></pre>
+
+<p>Enable the service</p>
+
+<p><code>sudo systemctl enable micronets-reg-server</code></p>
+
+<p>Starting and Stopping your container</p>
+
+<pre><code># systemd
+sudo systemctl start micronets-reg-server
+sudo systemctl stop micronets-reg-server
+sudo systemctl restart micronets-reg-server
+
+# docker
+docker start -a micronets-reg-server
+docker stop -t 2 micronets-reg-server
+docker restart -t 2 micronets-reg-server
+
+</code></pre>
+
+<div class="edit-meta">
+
+<br></div>
+<nav class="pagination"><a class="nav nav-prev" href="/micronets/server-components/websocket-proxy/" title="Websocket Proxy"><i class="fas fa-arrow-left" aria-hidden="true"></i> Prev - Websocket Proxy</a>
+<a class="nav nav-next" href="/micronets/test-components/" title="Test Components">Next - Test Components <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
+</nav><footer>
+</footer>
+</main><div class="sidebar">
+<nav>
+<ul>
+<li class=""><a href="https://cablelabs.github.io/micronets">Home</a></li>
+
+<li class=""><a href="/micronets/getting-started/">Getting Started</a>
+</li>
+
+<li class=""><a href="/micronets/micronets-gateway/">Micronets Gateway</a>
+<ul class="">
+<li class=""><a href="/micronets/micronets-gateway/example-interfaces-file/">Example /etc/network/interfaces</a></li>
+</ul>
+  
+</li>
+
+<li class="parent"><a href="/micronets/server-components/">Server Components</a>
+<ul class="sub-menu">
+<li class=""><a href="/micronets/server-components/micronets-manager/">Micronets Manager</a></li>
+<li class=""><a href="/micronets/server-components/identity-server/">Identity Server</a></li>
+<li class=""><a href="/micronets/server-components/mso-portal/">MSO Portal</a></li>
+<li class=""><a href="/micronets/server-components/registration-server/">Registration Server</a></li>
+<li class=""><a href="/micronets/server-components/auth-server/">Authorization Server</a></li>
+<li class=""><a href="/micronets/server-components/idora-server/">Idora Server</a></li>
+<li class=""><a href="/micronets/server-components/mud-tools/">MUD Services</a></li>
+<li class=""><a href="/micronets/server-components/websocket-proxy/">Websocket Proxy</a></li>
+<li class="active"><a href="/micronets/server-components/using-docker/">Using Docker</a></li>
+</ul>
+  
+</li>
+
+<li class=""><a href="/micronets/test-components/">Test Components</a>
+<ul class="">
+<li class=""><a href="/micronets/test-components/idora-client/">Idora Client App</a></li>
+<li class=""><a href="/micronets/test-components/qr-code-scanner/">QR Code Scanner</a></li>
+<li class=""><a href="/micronets/test-components/protomed-device/">ProtoMed Device</a></li>
+</ul>
+  
+</li>
+
+
+</ul>
+</nav>
+
+
+<div class="sidebar-footer"></div>
+</div>
+</div><a href="#" id="backtothetop-fixed" class="backtothetop"
+ data-backtothetop-duration="600"
+ data-backtothetop-easing="easeOutQuart"
+ data-backtothetop-fixed-fadeIn="1000"
+ data-backtothetop-fixed-fadeOut="1000"
+ data-backtothetop-fixed-bottom="10"
+ data-backtothetop-fixed-right="20">
+<span class="fa-layers fa-fw">
+<i class="fas fa-circle"></i>
+<i class="fas fa-arrow-circle-up"></i>
+</span></a>
+</div>
+</body>
+</html>

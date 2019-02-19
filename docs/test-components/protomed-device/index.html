@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<title>ProtoMed Device - CableLabs Micronets</title>
+<meta name="description" content="Developer documentation for CableLabs Micronets">
+<meta name="generator" content="Hugo 0.54.0" />
+<link href="https://cablelabs.github.io/micronetsindex.xml" rel="alternate" type="application/rss+xml">
+<link rel="canonical" href="https://cablelabs.github.io/micronets/test-components/protomed-device/">
+<link rel="stylesheet" href="https://cablelabs.github.io/micronets/css/theme.min.css">
+<script src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
+<link rel="stylesheet" href="https://cablelabs.github.io/micronets/css/chroma.min.css">
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+<script src="https://cablelabs.github.io/micronets/js/functions.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery.easing@1.4.1/jquery.easing.min.js"></script>
+<script src="https://cablelabs.github.io/micronets/js/jquery.backtothetop/jquery.backtothetop.min.js"></script></head>
+<body>
+<div class="container"><header>
+<h1>CableLabs Micronets</h1>
+<a href="https://github.com/cablelabs/micronets" class="github"><i class="fab fa-github"></i></a>
+<p class="description">Developer documentation for CableLabs Micronets</p>
+
+</header>
+<div class="menu">
+<nav>
+<ul>
+<li><a href="/micronets/">Micronets Home</a></li>
+<li><a href="https://www.cablelabs.com/micronets">About Micronets</a></li></ul>
+</nav>
+</div>
+<div class="content-container">
+<main><h1>ProtoMed Device</h1><h2 id="abstract">Abstract</h2>
+
+<p>This document describes QRCode scanning to authorize an MSO subscriber (in this case, onboarding a medical device onto the subscriber&rsquo;s WiFi network.)</p>
+
+<h2 id="application">Application</h2>
+
+<p>Source code for this application is in the <code>micronets-idora-client</code> repository. It is a multi-platform mobile application written using the Cordova framework.</p>
+
+<h2 id="required-servers">Required Servers</h2>
+
+<p>The following servers are required to setup an IdOra account and link it to an MSO&rsquo;s Micronets applications
+- micronets-auth-server
+- micronets-idora-server</p>
+
+<p>Note: When these servers (docker containers) are pulled and started, there should be a grandma/grandma account already created that is pre-authorized for MSO login via QRCode scanning.</p>
+
+<h2 id="basic-operation">Basic Operation</h2>
+
+<h3 id="account-creation">Account Creation</h3>
+
+<p>If necessary, a subscriber creates an IdOra account on the Idora Website (<a href="https://mycable.co/idora">https://mycable.co/idora</a>)
+This is a little buggy/quirky, UI-wise, follow closely. The main issue is that the browser keeps autofilling fields.
+- Open Browser Window, navigate to <a href="https://mycable.co/idora">https://mycable.co/idora</a>
+- Click LOG-IN
+- <strong>Ensure Username and Password fields are cleared</strong>
+- Click Sign Up
+- Signup screen appears. Enter a Username, Password, Email
+- Click Sign Up again.
+- Now the login returns, probably with the wrong autofill data. Change username/password to the correct values
+- Click Login
+- Now you are redirected to the manage websites screen.
+- Click the micronets box to enable it
+- You are redirected to the authorization server login screen to enable the QRCode scanning for this MSO.
+- NOTE: This username/password HAS TO MATCH THE MSO credentials, not necessarily the IdOra Credentials.
+For this demo, we use grandma/grandma for both the IdOra and MSO credentials. Deviate at your own risk. MSO credentials are hard coded in the authorization server:</p>
+
+<pre><code>const userInfo = {
+    &quot;alice&quot;: {
+        &quot;sub&quot;: &quot;9XE3-JI34-00132A&quot;,
+        &quot;username&quot;: &quot;alice&quot;,
+        &quot;password&quot;: &quot;secret&quot;
+    },
+    
+    &quot;bob&quot;: {
+        &quot;sub&quot;: &quot;1ZT5-OE63-57383B&quot;,
+        &quot;username&quot;: &quot;bob&quot;,
+        &quot;password&quot;: &quot;pass&quot;
+    },
+    
+    &quot;grandma&quot;: {
+        &quot;sub&quot;: &quot;7B2A-BE88-08817Z&quot;,
+        &quot;username&quot;: &quot;grandma&quot;,
+        &quot;password&quot;: &quot;grandma&quot;
+    }
+};
+</code></pre>
+
+<h3 id="using-the-ios-android-qrcode-scanner-application">Using the iOS/Android QRCode Scanner application</h3>
+
+<p>If you are starting the application cold, you will need to log in. If resuming from standby AND the IdOra Server has not been restarted, you won&rsquo;t need to (session should still be active).</p>
+
+<p>If you do need to log in, there is an annoying bug. When you click the Login button (after filling in user/pass), the virtual keyboard disappears, but the Login screen is still showing. You have to click the Login button again. TODO: Fix this.
+Once you are logged in, you can click the SCAN QR CODE button and scan the code presented by the MSO authorization server. screen. This should initiate the pairing process.</p>
+
+<h2 id="troubleshooting">Troubleshooting</h2>
+
+<ul>
+<li>Re-deploy the servers. On the Registration (mycable.co) instance, run <code>/etc/micronets/docker-update all</code>
+
+<ul>
+<li>This will pull fresh containers, which will have database files pre-initialized with a pre-authorized grandma</li>
+</ul></li>
+<li>Restart the iOS application, log in again.</li>
+<li>Cable the iPhone to your Mac, run Safari (Developer tools installed) and use the web inspector to debug</li>
+<li>Nuclear Option
+
+<ul>
+<li>Open a bash terminal in both the micronets-auth-server and micronets-idora-server containers</li>
+<li>Delete the .nedb files</li>
+<li>Restart both containers</li>
+<li>Recreate the grandma account on the Idora website</li>
+</ul></li>
+<li>If all else fails, just click on the QRCode to get through the demo :(</li>
+</ul>
+
+<h2 id="changing-the-url-of-the-registration-server">Changing the URL of the registration server</h2>
+
+<ul>
+<li>In the iOS app, click the menu icon -&gt; Settings -&gt; Server Address. Default is <code>https://mycable.co/idora</code>.</li>
+<li>Unfortunately, this is not persisted (baked into the application). On application restart, you&rsquo;ll have to change it again. It is best to just change the default server URL in the application and redeploy (www/index.html).</li>
+<li>Fortunately, it is super simple to change in the source code (index.html) and redeploy. Look at the README in the micronets-idora-client repository</li>
+</ul>
+
+<div class="edit-meta">
+
+<br></div>
+<nav class="pagination"><a class="nav nav-prev" href="/micronets/test-components/qr-code-scanner/" title="QR Code Scanner"><i class="fas fa-arrow-left" aria-hidden="true"></i> Prev - QR Code Scanner</a>
+<a class="nav nav-next" href="/micronets/test-components/idora-client/" title="Idora Client App">Next - Idora Client App <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
+</nav><footer>
+</footer>
+</main><div class="sidebar">
+<nav>
+<ul>
+<li class=""><a href="https://cablelabs.github.io/micronets">Home</a></li>
+
+<li class=""><a href="/micronets/getting-started/">Getting Started</a>
+</li>
+
+<li class=""><a href="/micronets/micronets-gateway/">Micronets Gateway</a>
+<ul class="">
+<li class=""><a href="/micronets/micronets-gateway/example-interfaces-file/">Example /etc/network/interfaces</a></li>
+</ul>
+  
+</li>
+
+<li class=""><a href="/micronets/server-components/">Server Components</a>
+<ul class="">
+<li class=""><a href="/micronets/server-components/micronets-manager/">Micronets Manager</a></li>
+<li class=""><a href="/micronets/server-components/identity-server/">Identity Server</a></li>
+<li class=""><a href="/micronets/server-components/mso-portal/">MSO Portal</a></li>
+<li class=""><a href="/micronets/server-components/registration-server/">Registration Server</a></li>
+<li class=""><a href="/micronets/server-components/auth-server/">Authorization Server</a></li>
+<li class=""><a href="/micronets/server-components/idora-server/">Idora Server</a></li>
+<li class=""><a href="/micronets/server-components/mud-tools/">MUD Services</a></li>
+<li class=""><a href="/micronets/server-components/websocket-proxy/">Websocket Proxy</a></li>
+<li class=""><a href="/micronets/server-components/using-docker/">Using Docker</a></li>
+</ul>
+  
+</li>
+
+<li class="parent"><a href="/micronets/test-components/">Test Components</a>
+<ul class="sub-menu">
+<li class=""><a href="/micronets/test-components/idora-client/">Idora Client App</a></li>
+<li class=""><a href="/micronets/test-components/qr-code-scanner/">QR Code Scanner</a></li>
+<li class="active"><a href="/micronets/test-components/protomed-device/">ProtoMed Device</a></li>
+</ul>
+  
+</li>
+
+
+</ul>
+</nav>
+
+
+<div class="sidebar-footer"></div>
+</div>
+</div><a href="#" id="backtothetop-fixed" class="backtothetop"
+ data-backtothetop-duration="600"
+ data-backtothetop-easing="easeOutQuart"
+ data-backtothetop-fixed-fadeIn="1000"
+ data-backtothetop-fixed-fadeOut="1000"
+ data-backtothetop-fixed-bottom="10"
+ data-backtothetop-fixed-right="20">
+<span class="fa-layers fa-fw">
+<i class="fas fa-circle"></i>
+<i class="fas fa-arrow-circle-up"></i>
+</span></a>
+</div>
+</body>
+</html>

@@ -3,11 +3,11 @@
 <head><meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<title>Server Components - CableLabs Micronets</title>
+<title>Idora Client App - CableLabs Micronets</title>
 <meta name="description" content="Developer documentation for CableLabs Micronets">
 <meta name="generator" content="Hugo 0.54.0" />
 <link href="https://cablelabs.github.io/micronetsindex.xml" rel="alternate" type="application/rss+xml">
-<link rel="canonical" href="https://cablelabs.github.io/micronets/server-components/">
+<link rel="canonical" href="https://cablelabs.github.io/micronets/test-components/idora-client/">
 <link rel="stylesheet" href="https://cablelabs.github.io/micronets/css/theme.min.css">
 <script src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
 <link rel="stylesheet" href="https://cablelabs.github.io/micronets/css/chroma.min.css">
@@ -30,31 +30,54 @@
 </nav>
 </div>
 <div class="content-container">
-<main><div id="breadcrumbs">
-    <a href="/">Home</a>
-    
-        
-    
-        
-            > <a href="/micronets">Micronets</a>
-        
-    
-        
-            > <a href="/server-components">Server components</a>
-        
-    
-        
-    
-</div>
-<p>These sections describe the various server components that can be used to manage Micronets and associated devices.</p>
+<main><h1>Idora Client App</h1><h2 id="abstract">Abstract</h2>
 
-<p>These components are deployable in a variety of ways to facilitate subscriber management and device provisioning
-- including device- and service-specific use cases.</p>
+<p>The Idora Client is Cordova based multi-platform mobile app used to scan QRCodes for the purposes of logging in to a website without using username/password.</p>
+
+<h2 id="developers">Developers</h2>
+
+<p>The repository for the Idora Client is <a href="https://github.com/cablelabs/micronets-idora-client">micronets-idora-client</a></p>
+
+<h2 id="overview">Overview</h2>
+
+<p>This application is HTML5 based, built using the <a href="https://cordova.apache.org/">Cordova</a> platform. No native code is required, just html, css, and javascript. The application provides for user account management, logging in, and scanning/submitting QRCodes.</p>
+
+<h2 id="messaging">Messaging</h2>
+
+<p>The Idora Client communicates with the following Micronets components:
+* <a href="https://github.com/cablelabs/micronets-idora-server">Idora Server</a>
+    + <code>OUT</code> signup/login/logout XHR requests for managing the IdOra User Account
+    + <code>OUT</code> authorize/revoke XHR requests for managing MSO access tokens</p>
+
+<p>The Idora Client has no inbound interfaces</p>
+
+<h2 id="operation">Operation</h2>
+
+<h3 id="setup">Setup</h3>
+
+<ul>
+<li>If the URL of the Idora Server is not what the app was compiled with (see <code>index.html</code> in the source code), you will need to use the Settings menu to set the URL <code>example: https://mycable.co/idora</code>. This must be done EVERY TIME the application is cold started.</li>
+<li>Create a user account</li>
+</ul>
+
+<h3 id="scanning">Scanning</h3>
+
+<ul>
+<li>Login</li>
+<li>Click Scan</li>
+<li>Scan the QRCode on the Authorization Server login page (redirected from the Registration Server as part of the onboard process)
+If successful, the user will be logged into the Authorization Server and the onboard sequence will continue.</li>
+</ul>
+
+<h2 id="installation">Installation</h2>
+
+<p>Detailed instructions for building and installing the Idora Client application can be found <a href="https://github.com/cablelabs/micronets-idora-client#Setup">here</a></p>
+
 <div class="edit-meta">
 
 <br></div>
-<nav class="pagination"><a class="nav nav-prev" href="/micronets/micronets-gateway/example-interfaces-file/" title="Example /etc/network/interfaces"><i class="fas fa-arrow-left" aria-hidden="true"></i> Prev - Example /etc/network/interfaces</a>
-<a class="nav nav-next" href="/micronets/server-components/micronets-manager/" title="Micronets Manager">Next - Micronets Manager <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
+<nav class="pagination"><a class="nav nav-prev" href="/micronets/test-components/" title="Test Components"><i class="fas fa-arrow-left" aria-hidden="true"></i> Prev - Test Components</a>
+<a class="nav nav-next" href="/micronets/test-components/qr-code-scanner/" title="QR Code Scanner">Next - QR Code Scanner <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
 </nav><footer>
 </footer>
 </main><div class="sidebar">
@@ -72,8 +95,8 @@
   
 </li>
 
-<li class="parent active"><a href="/micronets/server-components/">Server Components</a>
-<ul class="sub-menu">
+<li class=""><a href="/micronets/server-components/">Server Components</a>
+<ul class="">
 <li class=""><a href="/micronets/server-components/micronets-manager/">Micronets Manager</a></li>
 <li class=""><a href="/micronets/server-components/identity-server/">Identity Server</a></li>
 <li class=""><a href="/micronets/server-components/mso-portal/">MSO Portal</a></li>
@@ -87,9 +110,9 @@
   
 </li>
 
-<li class=""><a href="/micronets/test-components/">Test Components</a>
-<ul class="">
-<li class=""><a href="/micronets/test-components/idora-client/">Idora Client App</a></li>
+<li class="parent"><a href="/micronets/test-components/">Test Components</a>
+<ul class="sub-menu">
+<li class="active"><a href="/micronets/test-components/idora-client/">Idora Client App</a></li>
 <li class=""><a href="/micronets/test-components/qr-code-scanner/">QR Code Scanner</a></li>
 <li class=""><a href="/micronets/test-components/protomed-device/">ProtoMed Device</a></li>
 </ul>

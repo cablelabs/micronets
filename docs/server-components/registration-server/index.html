@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<title>Registration Server - CableLabs Micronets</title>
+<meta name="description" content="Developer documentation for CableLabs Micronets">
+<meta name="generator" content="Hugo 0.54.0" />
+<link href="https://cablelabs.github.io/micronetsindex.xml" rel="alternate" type="application/rss+xml">
+<link rel="canonical" href="https://cablelabs.github.io/micronets/server-components/registration-server/">
+<link rel="stylesheet" href="https://cablelabs.github.io/micronets/css/theme.min.css">
+<script src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
+<link rel="stylesheet" href="https://cablelabs.github.io/micronets/css/chroma.min.css">
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+<script src="https://cablelabs.github.io/micronets/js/functions.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery.easing@1.4.1/jquery.easing.min.js"></script>
+<script src="https://cablelabs.github.io/micronets/js/jquery.backtothetop/jquery.backtothetop.min.js"></script></head>
+<body>
+<div class="container"><header>
+<h1>CableLabs Micronets</h1>
+<a href="https://github.com/cablelabs/micronets" class="github"><i class="fab fa-github"></i></a>
+<p class="description">Developer documentation for CableLabs Micronets</p>
+
+</header>
+<div class="menu">
+<nav>
+<ul>
+<li><a href="/micronets/">Micronets Home</a></li>
+<li><a href="https://www.cablelabs.com/micronets">About Micronets</a></li></ul>
+</nav>
+</div>
+<div class="content-container">
+<main><h1>Registration Server</h1><h2 id="abstract">Abstract</h2>
+
+<p>This is a public facing server prototype that could be used by medical facilities (e.g. clinics) to effect the frictionless onboarding of a medical device to an MSO subscriber&rsquo;s account. Specifically, it facilitates the installation of the credentials required to connect the device to the subscriber&rsquo;s WiFi network.</p>
+
+<h2 id="developers">Developers</h2>
+
+<p>The repository for the Registration Server is <a href="https://github.com/cablelabs/micronets-reg-server">micronets-reg-server</a></p>
+
+<h2 id="overview">Overview</h2>
+
+<p>The Registration Server provides a web portal for clinic staff to manage the device onboarding process. It also provides an API for a medical device to initiate the onboard sequence, advertise itself as an available device on the web portal, submit a CSR and finally install the obtained certificate.</p>
+
+<h2 id="messaging">Messaging</h2>
+
+<p>The Registration Server communicates with the following Micronets components:
+* <a href="https://github.com/cablelabs/micronets/wiki/Protomed-Device-User-Manual">Medical Device</a>
+    + <code>IN</code> Device Advertisements &amp; Certificate Requests.
+* <a href="https://github.com/cablelabs/micronets-auth-server">Authorization Server</a>
+    + <code>OUT</code> Redirect for subscriber authentication, device onboarding authorization
+* <a href="https://github.com/cablelabs/micronets-mso-portal">MSO Portal</a>
+    + <code>OUT</code> Request a CSR Template on behalf of the medical device
+    + <code>OUT</code> Request a Certificate on behalf of the medical device</p>
+
+<p>Detailed descriptions of the APIs for this server can be found <a href="https://github.com/cablelabs/micronets-reg-server#API">here</a></p>
+
+<h2 id="operation">Operation</h2>
+
+<h3 id="preliminary-setup">Preliminary Setup</h3>
+
+<p>The initial state of a device is that it is provisioned onto the clinic wifi, and does not yet have any subscriber network certificates or credentials. As part of the clinic provisioning, it has the URL of the registration server baked in.</p>
+
+<p>The patient/subscriber is at the clinic with their mobile device, which has an MSO provided app installed that facilitates web page logins via scanning a QRCode.</p>
+
+<h3 id="onboarding-process">Onboarding Process</h3>
+
+<p>A clinic representative assists the subscriber in selecting a medical device and initiates the onboard operation by pressing a button on the device, which causes an advertise message to be sent to the server.</p>
+
+<p>An icon representing the device appears on the web portal and is selected by the clinic representative. A menu is presented for the selection of the subscriber&rsquo;s MSO(ISP), and the MSO is then selected.</p>
+
+<p>The web browser is then redirected to the subscriber&rsquo;s MSO Authorization Server. Information about the device and the action to be performed is displayed, along with a QRCode that contains identifiers for the service provider/application and the active login session. At this point the Authorization Server obtains a registration token from the MSO Portal, which accompanies the flow for the remainder of the onboard process.</p>
+
+<p>The subscriber uses the mobile app to scan the QRCode, which then forwards the scanned metadata to the Credential Server (Micronets IdOra Server). IdOra then executes a remote login request to the MSO Authorization Server, which now has information about the authenticated subscriber.</p>
+
+<p>The Authorization Server then redirects back to the Registration Server, which in turn sends a request to the Micronets MSO Portal for a CSR Template.</p>
+
+<p>When the CSR Template is received, it is returned to the device, which has been waiting with a long poll for a (CSRT) response to its advertise request.</p>
+
+<p>The device generates a CSR and submits it to the Registration Server, which forwards it to the MSO Portal, which forwards it to the Identity Server. The Identity Server creates a certificate and returns it down the chain to the device. Certain metadata such as the subscriber&rsquo;s SSID are also returned as part of the response.</p>
+
+<p>The device installs the certificate and configures the <code>wpa_supplicant</code> file. When the subscriber returns home with the device, it will automatically connect to the subscriber&rsquo;s WiFi.</p>
+
+<h3 id="sequence-diagram">Sequence Diagram</h3>
+
+<p><img src="https://github.com/cablelabs/micronets-reg-server/blob/master/doc/onboarding_sequence-2.png" alt="" /></p>
+
+<h2 id="installation">Installation</h2>
+
+<p>Detailed instructions for building and installing the Registration Server can be found <a href="https://github.com/cablelabs/micronets-reg-server#Build">here</a></p>
+
+<div class="edit-meta">
+
+<br></div>
+<nav class="pagination"><a class="nav nav-prev" href="/micronets/server-components/mso-portal/" title="MSO Portal"><i class="fas fa-arrow-left" aria-hidden="true"></i> Prev - MSO Portal</a>
+<a class="nav nav-next" href="/micronets/server-components/auth-server/" title="Authorization Server">Next - Authorization Server <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
+</nav><footer>
+</footer>
+</main><div class="sidebar">
+<nav>
+<ul>
+<li class=""><a href="https://cablelabs.github.io/micronets">Home</a></li>
+
+<li class=""><a href="/micronets/getting-started/">Getting Started</a>
+</li>
+
+<li class=""><a href="/micronets/micronets-gateway/">Micronets Gateway</a>
+<ul class="">
+<li class=""><a href="/micronets/micronets-gateway/example-interfaces-file/">Example /etc/network/interfaces</a></li>
+</ul>
+  
+</li>
+
+<li class="parent"><a href="/micronets/server-components/">Server Components</a>
+<ul class="sub-menu">
+<li class=""><a href="/micronets/server-components/micronets-manager/">Micronets Manager</a></li>
+<li class=""><a href="/micronets/server-components/identity-server/">Identity Server</a></li>
+<li class=""><a href="/micronets/server-components/mso-portal/">MSO Portal</a></li>
+<li class="active"><a href="/micronets/server-components/registration-server/">Registration Server</a></li>
+<li class=""><a href="/micronets/server-components/auth-server/">Authorization Server</a></li>
+<li class=""><a href="/micronets/server-components/idora-server/">Idora Server</a></li>
+<li class=""><a href="/micronets/server-components/mud-tools/">MUD Services</a></li>
+<li class=""><a href="/micronets/server-components/websocket-proxy/">Websocket Proxy</a></li>
+<li class=""><a href="/micronets/server-components/using-docker/">Using Docker</a></li>
+</ul>
+  
+</li>
+
+<li class=""><a href="/micronets/test-components/">Test Components</a>
+<ul class="">
+<li class=""><a href="/micronets/test-components/idora-client/">Idora Client App</a></li>
+<li class=""><a href="/micronets/test-components/qr-code-scanner/">QR Code Scanner</a></li>
+<li class=""><a href="/micronets/test-components/protomed-device/">ProtoMed Device</a></li>
+</ul>
+  
+</li>
+
+
+</ul>
+</nav>
+
+
+<div class="sidebar-footer"></div>
+</div>
+</div><a href="#" id="backtothetop-fixed" class="backtothetop"
+ data-backtothetop-duration="600"
+ data-backtothetop-easing="easeOutQuart"
+ data-backtothetop-fixed-fadeIn="1000"
+ data-backtothetop-fixed-fadeOut="1000"
+ data-backtothetop-fixed-bottom="10"
+ data-backtothetop-fixed-right="20">
+<span class="fa-layers fa-fw">
+<i class="fas fa-circle"></i>
+<i class="fas fa-arrow-circle-up"></i>
+</span></a>
+</div>
+</body>
+</html>

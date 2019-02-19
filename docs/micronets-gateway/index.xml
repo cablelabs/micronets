@@ -10,5 +10,14 @@
 	<atom:link href="https://cablelabs.github.io/micronets/micronets-gateway/index.xml" rel="self" type="application/rss+xml" />
     
     
+    <item>
+      <title>Example /etc/network/interfaces</title>
+      <link>https://cablelabs.github.io/micronets/micronets-gateway/example-interfaces-file/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://cablelabs.github.io/micronets/micronets-gateway/example-interfaces-file/</guid>
+      <description># Note: The contained entries should augment the system-provided /etc/network/interfaces file. # IOW, this file should not over-write the existing /etc/network/interfaces on # your system - the entries should be added. # # Define an OpenVSwitch bridge # auto brmn001 allow-ovs brmn001 iface brmn001 inet dhcp ovs_type OVSBridge # This is the port that&#39;s connected to the Internet ovs_bridge_uplink_port enp3s0 # the ovs_ports should list all wired and wireless interfaces under control of Mironets ovs_ports enp3s0 wlp2s0 enxac7f3ee61832 enx00e04c534458 ovs_protocols OpenFlow10,OpenFlow11,OpenFlow12,OpenFlow13 # Assign IP addresses to the bridge that may be configured as Micronets # Note: This will not be necessary once L3 routing is performed via OVS iface brmn001 inet static address 192.</description>
+    </item>
+    
   </channel>
 </rss>

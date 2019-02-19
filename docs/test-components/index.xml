@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Test Components on CableLabs Micronets</title>
+    <link>https://cablelabs.github.io/micronets/test-components/</link>
+    <description>Recent content in Test Components on CableLabs Micronets</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    
+	<atom:link href="https://cablelabs.github.io/micronets/test-components/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Idora Client App</title>
+      <link>https://cablelabs.github.io/micronets/test-components/idora-client/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://cablelabs.github.io/micronets/test-components/idora-client/</guid>
+      <description>Abstract The Idora Client is Cordova based multi-platform mobile app used to scan QRCodes for the purposes of logging in to a website without using username/password.
+Developers The repository for the Idora Client is micronets-idora-client
+Overview This application is HTML5 based, built using the Cordova platform. No native code is required, just html, css, and javascript. The application provides for user account management, logging in, and scanning/submitting QRCodes.
+Messaging The Idora Client communicates with the following Micronets components: * Idora Server + OUT signup/login/logout XHR requests for managing the IdOra User Account + OUT authorize/revoke XHR requests for managing MSO access tokens</description>
+    </item>
+    
+    <item>
+      <title>QR Code Scanner</title>
+      <link>https://cablelabs.github.io/micronets/test-components/qr-code-scanner/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://cablelabs.github.io/micronets/test-components/qr-code-scanner/</guid>
+      <description>Abstract This document describes QRCode scanning to authorize an MSO subscriber (in this case, onboarding a medical device onto the subscriber&amp;rsquo;s WiFi network.)
+Application Source code for this application is in the micronets-idora-client repository. It is a multi-platform mobile application written using the Cordova framework.
+Required Servers The following servers are required to setup an IdOra account and link it to an MSO&amp;rsquo;s Micronets applications - micronets-auth-server - micronets-idora-server
+Note: When these servers (docker containers) are pulled and started, there should be a grandma/grandma account already created that is pre-authorized for MSO login via QRCode scanning.</description>
+    </item>
+    
+    <item>
+      <title>ProtoMed Device</title>
+      <link>https://cablelabs.github.io/micronets/test-components/protomed-device/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://cablelabs.github.io/micronets/test-components/protomed-device/</guid>
+      <description>Abstract This document describes QRCode scanning to authorize an MSO subscriber (in this case, onboarding a medical device onto the subscriber&amp;rsquo;s WiFi network.)
+Application Source code for this application is in the micronets-idora-client repository. It is a multi-platform mobile application written using the Cordova framework.
+Required Servers The following servers are required to setup an IdOra account and link it to an MSO&amp;rsquo;s Micronets applications - micronets-auth-server - micronets-idora-server
+Note: When these servers (docker containers) are pulled and started, there should be a grandma/grandma account already created that is pre-authorized for MSO login via QRCode scanning.</description>
+    </item>
+    
+  </channel>
+</rss>

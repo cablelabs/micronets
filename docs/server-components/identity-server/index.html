@@ -3,11 +3,11 @@
 <head><meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<title>Server Components - CableLabs Micronets</title>
+<title>Identity Server - CableLabs Micronets</title>
 <meta name="description" content="Developer documentation for CableLabs Micronets">
 <meta name="generator" content="Hugo 0.54.0" />
 <link href="https://cablelabs.github.io/micronetsindex.xml" rel="alternate" type="application/rss+xml">
-<link rel="canonical" href="https://cablelabs.github.io/micronets/server-components/">
+<link rel="canonical" href="https://cablelabs.github.io/micronets/server-components/identity-server/">
 <link rel="stylesheet" href="https://cablelabs.github.io/micronets/css/theme.min.css">
 <script src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
 <link rel="stylesheet" href="https://cablelabs.github.io/micronets/css/chroma.min.css">
@@ -30,31 +30,39 @@
 </nav>
 </div>
 <div class="content-container">
-<main><div id="breadcrumbs">
-    <a href="/">Home</a>
-    
-        
-    
-        
-            > <a href="/micronets">Micronets</a>
-        
-    
-        
-            > <a href="/server-components">Server components</a>
-        
-    
-        
-    
-</div>
-<p>These sections describe the various server components that can be used to manage Micronets and associated devices.</p>
+<main><h1>Identity Server</h1><h1 id="identity-server">Identity Server</h1>
 
-<p>These components are deployable in a variety of ways to facilitate subscriber management and device provisioning
-- including device- and service-specific use cases.</p>
+<h2 id="abstract-what-it-does">Abstract/What it does</h2>
+
+<p>Identity Server is designed to create device specific x.509 certificates using a subscriber root certificate.</p>
+
+<h2 id="how-is-it-instantiated">How is it instantiated</h2>
+
+<p>The Identity Server can be run manually <a href="https://github.com/cablelabs/identity-service/blob/master/README.md#11-running-the-identity-server-manually">via npm commands</a> or <a href="https://github.com/cablelabs/identity-service/blob/master/README.md#12-running-the-identity-server-using-docker">as a Docker container</a>.</p>
+
+<h2 id="what-else-does-it-communicate-with">What else does it communicate with</h2>
+
+<p>The Identity Server communicates with the following Micronets components:</p>
+
+<h3 id="micronets-manager">Micronets Manager</h3>
+
+<pre><code>   * IN CSR Template Requests on behalf of medical device
+   * IN Certificate Requests on behalf of medical device
+</code></pre>
+
+<h2 id="link-s-to-details-on-how-to-build">Link(s) to details on how to build</h2>
+
+<p>Instructions for building and running the Identity Server API <a href="https://github.com/cablelabs/identity-service/blob/master/README.md#11-running-the-identity-server-manually">can be found in the Identity Server API README</a></p>
+
+<h2 id="link-s-to-details-on-how-to-deploy">Link(s) to details on how to deploy</h2>
+
+<p>Instructions for running the Identity Server API <a href="https://github.com/cablelabs/identity-service/blob/master/README.md#12-running-the-identity-server-using-docker">can be found in the Identity Server API README</a></p>
+
 <div class="edit-meta">
 
 <br></div>
-<nav class="pagination"><a class="nav nav-prev" href="/micronets/micronets-gateway/example-interfaces-file/" title="Example /etc/network/interfaces"><i class="fas fa-arrow-left" aria-hidden="true"></i> Prev - Example /etc/network/interfaces</a>
-<a class="nav nav-next" href="/micronets/server-components/micronets-manager/" title="Micronets Manager">Next - Micronets Manager <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
+<nav class="pagination"><a class="nav nav-prev" href="/micronets/server-components/micronets-manager/" title="Micronets Manager"><i class="fas fa-arrow-left" aria-hidden="true"></i> Prev - Micronets Manager</a>
+<a class="nav nav-next" href="/micronets/server-components/mso-portal/" title="MSO Portal">Next - MSO Portal <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
 </nav><footer>
 </footer>
 </main><div class="sidebar">
@@ -72,10 +80,10 @@
   
 </li>
 
-<li class="parent active"><a href="/micronets/server-components/">Server Components</a>
+<li class="parent"><a href="/micronets/server-components/">Server Components</a>
 <ul class="sub-menu">
 <li class=""><a href="/micronets/server-components/micronets-manager/">Micronets Manager</a></li>
-<li class=""><a href="/micronets/server-components/identity-server/">Identity Server</a></li>
+<li class="active"><a href="/micronets/server-components/identity-server/">Identity Server</a></li>
 <li class=""><a href="/micronets/server-components/mso-portal/">MSO Portal</a></li>
 <li class=""><a href="/micronets/server-components/registration-server/">Registration Server</a></li>
 <li class=""><a href="/micronets/server-components/auth-server/">Authorization Server</a></li>

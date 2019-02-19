@@ -3,11 +3,11 @@
 <head><meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<title>Server Components - CableLabs Micronets</title>
+<title>Example /etc/network/interfaces - CableLabs Micronets</title>
 <meta name="description" content="Developer documentation for CableLabs Micronets">
 <meta name="generator" content="Hugo 0.54.0" />
 <link href="https://cablelabs.github.io/micronetsindex.xml" rel="alternate" type="application/rss+xml">
-<link rel="canonical" href="https://cablelabs.github.io/micronets/server-components/">
+<link rel="canonical" href="https://cablelabs.github.io/micronets/micronets-gateway/example-interfaces-file/">
 <link rel="stylesheet" href="https://cablelabs.github.io/micronets/css/theme.min.css">
 <script src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
 <link rel="stylesheet" href="https://cablelabs.github.io/micronets/css/chroma.min.css">
@@ -30,31 +30,82 @@
 </nav>
 </div>
 <div class="content-container">
-<main><div id="breadcrumbs">
-    <a href="/">Home</a>
-    
-        
-    
-        
-            > <a href="/micronets">Micronets</a>
-        
-    
-        
-            > <a href="/server-components">Server components</a>
-        
-    
-        
-    
-</div>
-<p>These sections describe the various server components that can be used to manage Micronets and associated devices.</p>
+<main><h1>Example /etc/network/interfaces</h1><pre><code># Note: The contained entries should augment the system-provided /etc/network/interfaces file.
+#       IOW, this file should not over-write the existing /etc/network/interfaces on 
+#       your system - the entries should be added.
 
-<p>These components are deployable in a variety of ways to facilitate subscriber management and device provisioning
-- including device- and service-specific use cases.</p>
+#
+# Define an OpenVSwitch bridge
+#
+auto brmn001
+allow-ovs brmn001
+iface brmn001 inet dhcp
+  ovs_type OVSBridge
+  # This is the port that's connected to the Internet
+  ovs_bridge_uplink_port enp3s0
+  # the ovs_ports should list all wired and wireless interfaces under control of Mironets
+  ovs_ports enp3s0 wlp2s0 enxac7f3ee61832 enx00e04c534458
+  ovs_protocols OpenFlow10,OpenFlow11,OpenFlow12,OpenFlow13
+
+# Assign IP addresses to the bridge that may be configured as Micronets
+# Note: This will not be necessary once L3 routing is performed via OVS
+
+iface brmn001 inet static
+  address 192.168.250.1
+  netmask 255.255.255.0
+
+iface brmn001 inet static
+  address 192.168.251.1
+  netmask 255.255.255.0
+
+iface brmn001 inet static
+  address 192.168.252.1
+  netmask 255.255.255.0
+
+# Attach physical ports to the bridge (requesting particular port numbers)
+
+# This entry would represent the trunk/uplink interface (the interface with 
+# a configured gateway). This can be configured with a fixed IP or DHCP, as
+# documented in the interfaces man page
+allow-brmn001 enp3s0
+iface enp3s0 inet manual
+  ovs_type OVSPort
+  ovs_bridge brmn001
+  ovs_port_req 2
+  ovs_port_initial_state enabled
+
+# A wireless interface (managed by hostapd)
+allow-brmn001 wlp2s0
+iface wlp2s0 inet manual
+  ovs_type OVSPort
+  # The ovs_bridge must match the bridge definition (above)
+  ovs_bridge brmn001
+  # The port number needs to be unique for the bridge
+  ovs_port_req 3
+  # Indicates that the port is blocked at startup (until enabled via command)
+  ovs_port_initial_state blocked
+
+# A wired interface
+allow-brmn001 enxac7f3ee61832
+iface enxac7f3ee61832 inet manual
+  ovs_type OVSPort
+  ovs_bridge brmn001
+  ovs_port_req 4
+  ovs_port_initial_state blocked
+
+# A second wired interface
+allow-brmn001 enx00e04c534458
+iface enx00e04c534458 inet manual
+  ovs_type OVSPort
+  ovs_bridge brmn001
+  ovs_port_req 5
+  ovs_port_initial_state blocked
+</code></pre>
 <div class="edit-meta">
 
 <br></div>
-<nav class="pagination"><a class="nav nav-prev" href="/micronets/micronets-gateway/example-interfaces-file/" title="Example /etc/network/interfaces"><i class="fas fa-arrow-left" aria-hidden="true"></i> Prev - Example /etc/network/interfaces</a>
-<a class="nav nav-next" href="/micronets/server-components/micronets-manager/" title="Micronets Manager">Next - Micronets Manager <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
+<nav class="pagination"><a class="nav nav-prev" href="/micronets/micronets-gateway/" title="Micronets Gateway"><i class="fas fa-arrow-left" aria-hidden="true"></i> Prev - Micronets Gateway</a>
+<a class="nav nav-next" href="/micronets/server-components/" title="Server Components">Next - Server Components <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
 </nav><footer>
 </footer>
 </main><div class="sidebar">
@@ -65,15 +116,14 @@
 <li class=""><a href="/micronets/getting-started/">Getting Started</a>
 </li>
 
-<li class=""><a href="/micronets/micronets-gateway/">Micronets Gateway</a>
-<ul class="">
-<li class=""><a href="/micronets/micronets-gateway/example-interfaces-file/">Example /etc/network/interfaces</a></li>
+<li class="parent"><a href="/micronets/micronets-gateway/">Micronets Gateway</a>
+<ul class="sub-menu">
 </ul>
   
 </li>
 
-<li class="parent active"><a href="/micronets/server-components/">Server Components</a>
-<ul class="sub-menu">
+<li class=""><a href="/micronets/server-components/">Server Components</a>
+<ul class="">
 <li class=""><a href="/micronets/server-components/micronets-manager/">Micronets Manager</a></li>
 <li class=""><a href="/micronets/server-components/identity-server/">Identity Server</a></li>
 <li class=""><a href="/micronets/server-components/mso-portal/">MSO Portal</a></li>
