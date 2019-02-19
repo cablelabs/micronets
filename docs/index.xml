@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Micronets Home on CableLabs Micronets</title>
+    <title>Introduction on CableLabs Micronets</title>
     <link>https://cablelabs.github.io/micronets/</link>
-    <description>Recent content in Micronets Home on CableLabs Micronets</description>
+    <description>Recent content in Introduction on CableLabs Micronets</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     
@@ -45,7 +45,7 @@ Prerequisites  A private registry host, such as Artifactory or GitLab must be se
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://cablelabs.github.io/micronets/externalcontent/micronets.wiki/home/</guid>
-      <description>What is Micronets CableLabs Micronets is a next generation on-premise networking platform focused on providing adaptive security for all devices connecting to a consumer and/or SMB network and provides dynamic micro-segmentation and management of connectivity to those devices. It is designed to provide seamless and transparent security to the users without burdening them with the technical aspects of configuring the network.</description>
+      <description>What is Micronets Micronets is a next generation on-premise networking platform focused on providing adaptive security for all devices connecting to a consumer and/or SMB network and provides dynamic micro-segmentation and management of connectivity to those devices. It is designed to provide seamless and transparent security to the users without burdening them with the technical aspects of configuring the network. A beginner&amp;rsquo;s overview of Micronets is available at the About Micronets site.</description>
     </item>
     
     <item>
