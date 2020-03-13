@@ -7,14 +7,21 @@ Prerequisites:
 1. A server reachable by the server hosting the Micronet Manager instances
 and any Micronets gateways
 2. Docker and Docker-compose
+3. OpenSSL
+4. curl
 
 Instructions:
 
-1. Create the root certificate for the WS proxy:
+0. Download the cert generation scripts:
 
    ```
    curl -O https://github.com/cablelabs/micronets-ws-proxy/blob/nccoe-build-3/bin/gen-root-cert
    curl -O https://github.com/cablelabs/micronets-ws-proxy/blob/nccoe-build-3/bin/gen-leaf-cert
+   ```
+
+1. Create the root certificate for the WS proxy:
+
+   ```
    ./gen-root-cert --cert-basename micronets-ws-root \
        --subject-org-name "Micronets Websocket Root Cert" \
        --expiration-in-days 3650
