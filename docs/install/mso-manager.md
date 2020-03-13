@@ -13,18 +13,22 @@ Instructions:
 
 1. Download the MSO Portal docker Makefile
 
-```
-`    curl 
-```
-2. Modify the Makefile
+   ```
+   curl -O  
+   ```
+2. Modify the Makefile:
+
+   - DOCKER_REGISTRY should be set to `community.cablelabs.com:4567`
+   - DOCKER_IMAGE_TAG should be `nccoe-build-3`
+
 3. Download the Docker image
 
-```
-    make docker-pull
-```
+    ```
+    make -f mso-portal.make docker-pull
+    ```
 
 4. Start the Docker container
 
-```
-    make docker-run
-```
+    ```
+    make -f mso-portal.make docker-run
+    ```

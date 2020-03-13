@@ -1,6 +1,6 @@
 # Installation Guide for Micronets Prototype Components 
 
-### for NCCOE Build 3
+### for NCCoE Build 3
 
 The Micronets Prototype consists of components representing different functional
 elements of a network operator's management network, a home wireless gateway, and 
@@ -9,6 +9,9 @@ an on-boarding application.
 This guide details the installation of the Micronet Prototype components. A separate
 [Operation Guide](operation-guide.md) document describes the operation of the prototype 
 once it's setup. 
+
+Below are the installation guides for the various components. These
+should be followed in-order.
 
 0. [Shared Credentials](docs/install/shared-credentials.md)
 1. [The MSO Portal](docs/install/mso-manager.md)
