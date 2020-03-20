@@ -17,6 +17,7 @@ Instructions:
    ```
    curl -O https://github.com/cablelabs/micronets-ws-proxy/blob/nccoe-build-3/bin/gen-root-cert
    curl -O https://github.com/cablelabs/micronets-ws-proxy/blob/nccoe-build-3/bin/gen-leaf-cert
+   chmod +x gen-root-cert gen-leaf-cert
    ```
 
 1. Create the root certificate for the WS proxy:
@@ -38,7 +39,7 @@ Instructions:
       --ca-certfile micronets-ws-root.cert.pem \
       --ca-keyfile micronets-ws-root.key.pem
    cat micronets-ws-proxy.cert.pem micronets-ws-proxy.key.pem \
-      > micronets-ws-proxy.pkeycert.pem   ```
+      > micronets-ws-proxy.pkeycert.pem
    ```
 
 3. Generate the certificate & key to be used by the Micronets Manager to connect to the WS Proxy:
