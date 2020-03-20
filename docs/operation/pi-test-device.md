@@ -10,4 +10,4 @@ Prerequisites:
 
 Operation:
 
-[Operation](https://github.com/cablelabs/micronets-pi3/nccoe-build-3/README.md#Operation)
+[Operation](https://github.com/cablelabs/micronets-pi3/blob/nccoe-build-3/README.md#Operation)
