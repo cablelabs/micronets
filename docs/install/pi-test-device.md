@@ -10,4 +10,4 @@ Prerequisites:
 
 Instructions:
 
-[Installation](https://raw.githubusercontent.com/cablelabs/micronets-pi3/nccoe-build-3/README.md#Installation)
+[Installation](https://github.com/cablelabs/micronets-pi3/nccoe-build-3/README.md#Installation)
