@@ -15,8 +15,8 @@ Instructions:
 0. Download the cert generation scripts:
 
    ```
-   curl -O https://github.com/cablelabs/micronets-ws-proxy/blob/nccoe-build-3/bin/gen-root-cert
-   curl -O https://github.com/cablelabs/micronets-ws-proxy/blob/nccoe-build-3/bin/gen-leaf-cert
+   curl -O https://raw.githubusercontent.com/cablelabs/micronets-ws-proxy/master/bin/gen-root-cert
+   curl -O https://raw.githubusercontent.com/cablelabs/micronets-ws-proxy/master/bin/gen-leaf-cert
    chmod +x gen-root-cert gen-leaf-cert
    ```
 
@@ -75,34 +75,32 @@ Instructions:
 5. Download the management script:
 
    ```
-   sudo mkdir -p /etc/micronets.d/micronets-ws-proxy/lib
-   cd /etc/micronets.d/micronets-ws-proxy
-   curl -O https://github.com/cablelabs/micronets-ws-proxy/blob/nccoe-build-3/bin/micronets-ws-proxy.sh
+   curl -O https://raw.githubusercontent.com/cablelabs/micronets-ws-proxy/master/bin/micronets-ws-proxy
+   sudo install -v -o root -m 755 -D -t /etc/micronets/ micronets-ws-proxy 
    ```
 
 6. Copy the ws proxy server cert and key for use by the WS Proxy Docker container:
 
    ```
-   sudo cp micronets-ws-proxy.pkeycert.pem /etc/micronets.d/micronets-ws-proxy/lib/
-   sudo cp micronets-ws-root.cert.pem /etc/micronets.d/micronets-ws-proxy/lib/
+   sudo install -v -o root -m 600 -D -t /etc/micronets/micronets-ws-proxy.d/lib micronets-ws-proxy.pkeycert.pem  micronets-ws-root.cert.pem 
    ```
 
 7. Download the Micronets Websocket proxy image:
 
    ```
-   /etc/micronets.d/micronets-ws-proxy/micronets-ws-proxy.sh docker-pull
+   /etc/micronets/micronets-ws-proxy docker-pull
    ```
 
 8. Start the proxy:
 
    ```
-   /etc/micronets.d/micronets-ws-proxy/micronets-ws-proxy.sh docker-run
+   /etc/micronets.d/micronets-ws-proxy docker-run
    ```
 
 9. Verify the Websocket Proxy is running:
 
    ```
-   /etc/micronets.d/micronets-ws-proxy/micronets-ws-proxy.sh docker-logs
+   /etc/micronets.d/micronets-ws-proxy docker-logs
    ```
 
    - You should see output like the following:
