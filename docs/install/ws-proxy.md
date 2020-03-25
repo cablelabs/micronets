@@ -15,8 +15,8 @@ Instructions:
 0. Download the cert generation scripts:
 
    ```
-   curl -O https://raw.githubusercontent.com/cablelabs/micronets-ws-proxy/master/bin/gen-root-cert
-   curl -O https://raw.githubusercontent.com/cablelabs/micronets-ws-proxy/master/bin/gen-leaf-cert
+   curl -O https://raw.githubusercontent.com/cablelabs/micronets-ws-proxy/nccoe-build-3/bin/gen-root-cert
+   curl -O https://raw.githubusercontent.com/cablelabs/micronets-ws-proxy/nccoe-build-3/bin/gen-leaf-cert
    chmod +x gen-root-cert gen-leaf-cert
    ```
 
@@ -75,7 +75,7 @@ Instructions:
 5. Download the management script:
 
    ```
-   curl -O https://raw.githubusercontent.com/cablelabs/micronets-ws-proxy/master/bin/micronets-ws-proxy
+   curl -O https://raw.githubusercontent.com/cablelabs/micronets-ws-proxy/nccoe-build-3/bin/micronets-ws-proxy
    sudo install -v -o root -m 755 -D -t /etc/micronets/ micronets-ws-proxy 
    ```
 
