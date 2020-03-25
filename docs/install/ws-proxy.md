@@ -9,6 +9,8 @@ and any Micronets gateways
 2. Docker and Docker-compose
 3. OpenSSL
 4. curl
+5. Python 3.6+
+6 The Python virtualenv package
 
 Instructions:
 
@@ -133,7 +135,6 @@ parameters.
         --client-cert micronets-manager.pkeycert.pem \
         --ca-cert micronets-ws-root.cert.pem  \
         wss://localhost:5050/micronets/v1/ws-proxy/test/mm
-   
    ```
 
    if everything is configured correctly, the test client should output:
