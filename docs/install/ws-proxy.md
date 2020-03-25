@@ -98,7 +98,7 @@ parameters.
 8. Start the proxy:
 
    ```
-   /etc/micronets.d/micronets-ws-proxy docker-run
+   /etc/micronets/micronets-ws-proxy docker-run
    ```
 
 9. Verify the Websocket Proxy is running:
