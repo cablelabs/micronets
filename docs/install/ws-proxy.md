@@ -79,6 +79,10 @@ Instructions:
    sudo install -v -o root -m 755 -D -t /etc/micronets/ micronets-ws-proxy 
    ```
 
+Note: These instructions assume the default values contained in the micronets-ws-proxy management script.
+These values can be modified directly in your copy of the management script or overridden via command-line
+parameters.
+
 6. Copy the ws proxy server cert and key for use by the WS Proxy Docker container:
 
    ```
