@@ -100,7 +100,7 @@ Instructions:
 9. Verify the Websocket Proxy is running:
 
    ```
-   /etc/micronets.d/micronets-ws-proxy docker-logs
+   /etc/micronets/micronets-ws-proxy docker-logs
    ```
 
    - You should see output like the following:
@@ -118,6 +118,48 @@ Instructions:
     micronets-ws-proxy: INFO Clients may connect to wss://0.0.0.0:5050/micronets/v1/ws-proxy/*
     ```
 
-10. Save the `micronets-manager.pkeycert.pem`, `micronets-gateway-service.pkeycert.pem`,
+10. Verify the websocket proxy credentials
+
+   ```
+   curl -O https://raw.githubusercontent.com/cablelabs/micronets-ws-proxy/nccoe-build-3/bin/websocket-test-client.py
+   curl -O https://raw.githubusercontent.com/cablelabs/micronets-ws-proxy/nccoe-build-3/requirements.txt
+   virtualenv --clear -p $(which python3.6) $PWD/virtuanenv
+   ./virtuanenv/bin/pip install -r requirements.txt
+   ./virtuanenv/bin/python websocket-test-client.py \
+        --client-cert micronets-manager.pkeycert.pem \
+        --ca-cert micronets-ws-root.cert.pem  \
+        wss://localhost:5050/micronets/v1/ws-proxy/test/mm
+   
+   ```
+
+   if everything is configured correctly, the test client should output:
+   
+   ```
+    Startup...
+    Loading test client certificate from micronets-manager.pkeycert.pem
+    Loading CA certificate from micronets-ws-root.cert.pem
+    ws-test-client: Opening websocket to wss://localhost:5050/micronets/v1/ws-proxy/test/mm...
+    ws-test-client: Connected to wss://localhost:5050/micronets/v1/ws-proxy/test/mm.
+    ws-test-client: Sending HELLO message...
+    ws-test-client: > sending hello message:  {"message": {"messageId": 0, "messageType": "CONN:HELLO", "requiresResponse": false, "peerClass": "micronets-ws-test-client", "peerId": "12345678"}}
+    ws-test-client: Waiting for HELLO message...
+   ```
+
+   and `/etc/micronets/micronets-ws-proxy docker-logs` should include:
+
+   ```
+    2020-03-25T09:48:01.742413418Z 2020-03-25 09:48:01,742 micronets-ws-proxy: INFO ws_connected: client 140030650222128: Received HELLO message:
+    2020-03-25T09:48:01.742422736Z 2020-03-25 09:48:01,742 micronets-ws-proxy: INFO {
+    2020-03-25T09:48:01.742426214Z   "message": {
+    2020-03-25T09:48:01.742429177Z     "messageId": 0,
+    2020-03-25T09:48:01.742432027Z     "messageType": "CONN:HELLO",
+    2020-03-25T09:48:01.742434882Z     "peerClass": "micronets-ws-test-client",
+    2020-03-25T09:48:01.742437762Z     "peerId": "12345678",
+    2020-03-25T09:48:01.742440568Z     "requiresResponse": false
+    2020-03-25T09:48:01.742443356Z   }
+    2020-03-25T09:48:01.742445991Z }
+   ```
+
+11. Save the `micronets-manager.pkeycert.pem`, `micronets-gateway-service.pkeycert.pem`,
    and `micronets-ws-root.cert.pem` files for configuring the Micronets Manager
    and Micronet Gateway components.
