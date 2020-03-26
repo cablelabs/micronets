@@ -4,7 +4,7 @@
 
 Prerequisites:
 
-1. A server reachable by the server hosting the Micronet Manager instances
+1. A Ubuntu 18.04 LTS server reachable by the server hosting the Micronet Manager instances
 and any Micronets gateways
 2. Docker and Docker-compose
 3. OpenSSL
@@ -81,9 +81,9 @@ Instructions:
    sudo install -v -o root -m 755 -D -t /etc/micronets/ micronets-ws-proxy 
    ```
 
-Note: These instructions assume the default values contained in the micronets-ws-proxy management script.
-These values can be modified directly in your copy of the management script or overridden via command-line
-parameters.
+    Note: These instructions assume the default values contained in the micronets-ws-proxy management script.
+    These values can be modified directly in your copy of the management script or overridden via command-line
+    parameters.
 
 6. Copy the ws proxy server cert and key for use by the WS Proxy Docker container:
 
@@ -96,6 +96,9 @@ parameters.
    ```
    /etc/micronets/micronets-ws-proxy docker-pull
    ```
+
+    Note: If you cannot connect to the Docker service, use "sudo usermod -aG docker <username>" to
+          add the user account to the docker group.
 
 8. Start the proxy:
 
