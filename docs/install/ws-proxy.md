@@ -132,9 +132,9 @@ Instructions:
    ```
    curl -O https://raw.githubusercontent.com/cablelabs/micronets-ws-proxy/nccoe-build-3/bin/websocket-test-client.py
    curl -O https://raw.githubusercontent.com/cablelabs/micronets-ws-proxy/nccoe-build-3/requirements.txt
-   virtualenv --clear -p $(which python3.6) $PWD/virtuanenv
-   ./virtuanenv/bin/pip install -r requirements.txt
-   ./virtuanenv/bin/python websocket-test-client.py \
+   virtualenv --clear -p $(which python3.6) $PWD/virtualenv
+   ./virtualenv/bin/pip install -r requirements.txt
+   ./virtualenv/bin/python websocket-test-client.py \
         --client-cert micronets-manager.pkeycert.pem \
         --ca-cert micronets-ws-root.cert.pem  \
         wss://localhost:5050/micronets/v1/ws-proxy/test/mm
