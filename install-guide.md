@@ -20,5 +20,5 @@ should be followed in-order.
 4. [The Websocket Proxy](docs/install/ws-proxy.md)
 5. [A Micronets Gateway](docs/install/micronets-gateway.md)
 6. [A Micronets Manager](docs/install/micronets-manager.md)
-7. [The Onboarding Application](docs/install/onboarding-app.md)
+7. [The Mobile Onboarding App (ios/Android)](docs/install/mobile-device.md)
 8. [A Raspberry Pi-based Test Device](docs/install/pi-test-device.md)
