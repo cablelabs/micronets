@@ -1,9 +1,10 @@
-## Offboarding a Pi device from a MICRONET
+## Removing a Pi device from a Micronet
 This removes all subscriber credentials from the Pi device. 
 ### for NCCoE Build 3
 
 #### Prerequsites:
 - A Raspberry Pi with the `proto-pi` software installed & configured:
+
   [Installation Guide - Pi](docs/install/pi-test-device.md)
 
 #### Instructions:

@@ -10,4 +10,4 @@ Prerequisites:
 
 Instructions:
 
-[Installation](https://github.com/cablelabs/micronets-pi3/blob/nccoe-build-3/README.md#Installation)
+[Micronets Proto-Pi Installation Guide](https://github.com/cablelabs/micronets-pi3/blob/nccoe-build-3/README.md#Installation)

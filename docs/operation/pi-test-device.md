@@ -8,6 +8,4 @@ Prerequisites:
 2. A PiTFT 320x240 capacitive OLED display
 3. A DPP compatible network adapter
 
-Operation:
-
-[Operation](https://github.com/cablelabs/micronets-pi3/blob/nccoe-build-3/README.md#Operation)
+[Micronets Proto-Pi Operation Guide](https://github.com/cablelabs/micronets-pi3/blob/nccoe-build-3/README.md#Operation)
