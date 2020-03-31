@@ -54,13 +54,57 @@ Instructions:
     Note: If you cannot connect to the Docker service, use "sudo usermod -aG docker <username>" to
           add the user account to the docker group.
 
-5. Start a Micronets Manager for a subscriber:
+5. Configure nginx for Micronets Manager:
+
+   ```
+   sudo /etc/micronets/micronets-manager.d/mm-container setup-web-proxy
+   ```
+
+   This will setup the folder to dynamically create forwarding entries for
+   Micronets Manager instances as they're created/removed. But the site files in 
+   `/etc/nginx/sites-available/` need to have the following added to the `server` 
+   blocks:
+   
+   ```
+   include /etc/nginx/micronets-subscriber-forwards/*.conf;
+   ```
+
+   For example:
+   
+   ```
+   server {
+        listen 443 ssl;
+        listen [::]:443 ssl;
+
+        root /var/www/mm.mydomain.in/html;
+
+        index index.html index.htm index.nginx-debian.html;
+
+        server_name mm.mydomain.in;
+
+        location / {
+                proxy_pass      http://localhost:8080/;
+        }
+
+        ssl_certificate /etc/letsencrypt/live/mm.mydomain.in/fullchain.pem; # managed by Certbot
+        ssl_certificate_key /etc/letsencrypt/live/mm.mydomain.in/privkey.pem; # managed by Certbot
+
+        include /etc/nginx/micronets-subscriber-forwards/*.conf;
+   }
+   ```
+
+   Note that it's not necessary to restart nginx after these changes 
+   since the `mm-container` script will cause nginx to reload files.
+   But if you want to ensure your edits are OK, you can run 
+   `sudo nginx -s reload` to have nginx reload the configuration files.
+
+6. Start a Micronets Manager for a subscriber:
 
    ```
    /etc/micronets/micronets-manager.d/mm-container start <subscriber-name>
    ```
 
-6. Verify the Micronets Manager is running:
+7. Verify the Micronets Manager is running:
 
    ```
    /etc/micronets/micronets-manager.d/mm-container logs <subscriber>
