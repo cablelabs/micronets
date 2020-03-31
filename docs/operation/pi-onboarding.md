@@ -24,4 +24,5 @@
 
 #### Further Reading:
 [Operation Guide - Pi](https://github.com/cablelabs/micronets-pi3/blob/nccoe-build-3/README.md#Operation)
+
 [Operation Guide - Mobile](https://github.com/cablelabs/micronets-mobile/blob/nccoe-build-3/README.md#Operation)
