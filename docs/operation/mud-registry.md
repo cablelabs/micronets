@@ -21,4 +21,4 @@ The MUD file is located relative to a base URL as configured by the MUD registry
 
 All of these requests can be submitted to a global registry, providing a vendor code to facilitate redirection, or directly to the vendor endpoint.
 
-[MUD Registry Operations Guide](https://github.com/cablelabs/micronets-mud-registry/blob/nccoe-build-3/README.md#Operation)
+[MUD Registry Operations Guide (API)](https://github.com/cablelabs/micronets-mud-registry/blob/nccoe-build-3/README.md#Operation)
