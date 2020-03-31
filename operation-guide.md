@@ -12,7 +12,7 @@ the prototype components.
 
 1. [Creating and registering subscribers](docs/operation/mso-portal.md)
 2. [Configuring a Micronets Manager for a Gateway](docs/operation/micronets-manager.md)
-3. [Registering a vendor code with the central MUD registry](docs/operation/vendor-registration.md)
+3. [Using the MUD Registry to register devices and lookup MUD files](docs/operation/mud-registry.md)
 4. [Associating/disassociating a Pi Test Device with a MUD file](docs/operation/mud-file-setup.md)
 5. [General operation of the Pi Test Device](docs/operation/pi-test-device.md)
 6. [General operation of the Mobile Device (phone)](docs/operation/mobile-device.md)
