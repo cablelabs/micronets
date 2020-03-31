@@ -6,6 +6,7 @@ The MUD Registry provides an HTTP API used to manage the association of MUD file
 - Register a device model using:
   + A public key as an unique device identifier
   + A vendor code to identify a vendor/manufacturer
+
 The supplied device model is used as the MUD file name. The MUD file is located relative to a base URL as configured by the MUD registry.
 
 - Locate or return a MUD file using:
