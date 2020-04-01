@@ -1,6 +1,8 @@
 ## Removing a Pi device from a Micronet
-This removes all subscriber credentials from the Pi device. 
+This removes all subscriber credentials from the Pi device.
 ### for NCCoE Build 3
+
+### Resetting the Pi Device
 
 #### Prerequsites:
 - A Raspberry Pi with the `proto-pi` software installed & configured:
@@ -15,3 +17,6 @@ This removes all subscriber credentials from the Pi device.
 
 #### Further Reading:
 [Operation Guide - Pi](https://github.com/cablelabs/micronets-pi3/blob/nccoe-build-3/README.md#Operation)
+
+### Removing Devices from Micronets Manager
+(TBD)
