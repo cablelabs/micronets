@@ -17,7 +17,8 @@ Instructions:
 0. Install a newer version of docker-compose, if necessary. (Ubuntu 18.04 comes with an older version)
 
    ```
-   sudo curl -L https://github.com/docker/compose/releases/download/1.24.1/docker-compose-`uname -s`-`uname -m` -o /usr/local/bin/docker-compose
+   curl -L -O https://github.com/docker/compose/releases/download/1.24.1/docker-compose-Linux-`uname -m`
+   sudo install -v -o root -m 755 docker-compose-Linux-`uname -m` /usr/local/bin/docker-compose
    chmod +x /usr/local/bin/docker-compose
    ```
 
