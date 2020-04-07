@@ -6,11 +6,19 @@ Prerequisites:
 
 1. A Ubuntu 18.04 LTS server reachable by the server hosting the Micronet Manager instances
 and any Micronets gateways
-2. Docker and Docker-compose
-3. OpenSSL
+2. Docker (v18.06 or higher)
+3. Docker-compose (v1.23.1 or higher)
+3. OpenSSL (1.0.2g or higher)
 4. curl
 
 Instructions:
+
+0. Install a newer version of docker-compose, if necessary. (Ubuntu 18.04 comes with an older version)
+
+   ```
+   sudo curl -L https://github.com/docker/compose/releases/download/1.24.1/docker-compose-`uname -s`-`uname -m` -o /usr/local/bin/docker-compose
+   chmod +x /usr/local/bin/docker-compose
+   ```
 
 1. Download the management script:
 
@@ -107,7 +115,7 @@ Instructions:
 7. Verify the Micronets Manager is running:
 
    ```
-   /etc/micronets/micronets-manager.d/mm-container logs <subscriber>
+   /etc/micronets/micronets-manager.d/mm-container logs <subscriber-name>
    ```
 
    - You should see output like the following:
