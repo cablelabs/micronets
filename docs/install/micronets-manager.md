@@ -10,6 +10,7 @@ and any Micronets gateways
 3. Docker-compose (v1.23.1 or higher)
 3. OpenSSL (1.0.2g or higher)
 4. curl
+5. nginx (1.14.0 or higher)
 
 Instructions:
 
