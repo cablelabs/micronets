@@ -4,17 +4,24 @@
 
 Prerequisites:
 
-1. A Ubuntu 18.04 LTS server reachable by the server hosting the Micronet Manager instances
+* A Ubuntu 18.04 LTS server reachable by the server hosting the Micronet Manager instances
 and any Micronets gateways
-2. Docker (v18.06 or higher)
-3. Docker-compose (v1.23.1 or higher)
-3. OpenSSL (1.0.2g or higher)
-4. curl
-5. nginx (1.14.0 or higher)
+* Docker (v18.06 or higher)
+* Docker-compose (v1.23.1 or higher)
+* OpenSSL (1.0.2g or higher)
+* curl
+* nginx (1.14.0 or higher)
 
 Instructions:
 
 0. Install a newer version of docker-compose, if necessary. (Ubuntu 18.04 comes with an older version)
+
+   Check the current version with:
+   ```
+   docker-compose --version
+   ```
+   
+   If the version is earlier than v1.23.1 run the following to install a new version in `/usr/local/bin`:
 
    ```
    curl -L -O https://github.com/docker/compose/releases/download/1.24.1/docker-compose-Linux-`uname -m`
@@ -22,7 +29,7 @@ Instructions:
    chmod +x /usr/local/bin/docker-compose
    ```
 
-1. Download the management script:
+0. Download the management script:
 
    ```
    curl -O https://raw.githubusercontent.com/cablelabs/micronets-manager/nccoe-build-3/scripts/mm-container
@@ -35,7 +42,7 @@ Instructions:
     These values can be modified directly in your copy of the management script or overridden via command-line
     parameters.
 
-2. Copy the mm server cert/key and the WS Proxy root CA cert created in earlier steps
+0. Copy the mm server cert/key and the WS Proxy root CA cert created in earlier steps
    for use by the Micronets Manager docker container(s):
 
    ```
@@ -46,7 +53,7 @@ Instructions:
    Note: Creating the `micronets-ws-proxy.pkeycert.pem` file is a work-around for an issue
    that will be fixed in the near future.
 
-3. Generate a shared secret for communicating between the MSO Portal and the MM:
+0. Generate a shared secret for communicating between the MSO Portal and the MM:
 
    ```
    sudo /etc/micronets/micronets-manager.d/mm-container create-mso-secret
@@ -55,7 +62,7 @@ Instructions:
     Note: This may be changed to generate the shared secret during the MSO Portal
           installation.
 
-4. Download the Micronets Manager docker image:
+0. Download the Micronets Manager docker image:
 
    ```
    /etc/micronets/micronets-manager.d/mm-container pull
@@ -64,7 +71,7 @@ Instructions:
     Note: If you cannot connect to the Docker service, use "sudo usermod -aG docker <username>" to
           add the user account to the docker group.
 
-5. Configure nginx for Micronets Manager:
+0. Configure nginx for Micronets Manager:
 
    ```
    sudo /etc/micronets/micronets-manager.d/mm-container setup-web-proxy
@@ -73,7 +80,8 @@ Instructions:
    This will setup the folder to dynamically create forwarding entries for
    Micronets Manager instances as they're created/removed. But the site files in 
    `/etc/nginx/sites-available/` need to have the following added to the `server` 
-   blocks:
+   blocks to enable the forwarding of subscriber operations to the correct 
+   Docker container.
    
    ```
    include /etc/nginx/micronets-subscriber-forwards/*.conf;
@@ -108,13 +116,13 @@ Instructions:
    But if you want to ensure your edits are OK, you can run 
    `sudo nginx -s reload` to have nginx reload the configuration files.
 
-6. Start a Micronets Manager for a subscriber:
+0. Start a Micronets Manager for a subscriber:
 
    ```
    /etc/micronets/micronets-manager.d/mm-container start <subscriber-name>
    ```
 
-7. Verify the Micronets Manager is running:
+0. Verify the Micronets Manager is running:
 
    ```
    /etc/micronets/micronets-manager.d/mm-container logs <subscriber-name>
