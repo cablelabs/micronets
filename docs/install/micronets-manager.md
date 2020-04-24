@@ -53,14 +53,14 @@ Instructions:
    Note: Creating the `micronets-ws-proxy.pkeycert.pem` file is a work-around for an issue
    that will be fixed in the near future.
 
-0. Generate a shared secret for communicating between the MSO Portal and the MM:
+0. Copy the shared secret value generated during the MSO Portal install:
 
    ```
-   sudo /etc/micronets/micronets-manager.d/mm-container create-mso-secret
+   scp user@mso-portal-server:/etc/micronets/mso-portal.d/lib/mso-auth-secret ./
+   sudo install -v -o root -m 600 -D -t /etc/micronets/micronets-manager.d/lib mso-auth-secret
    ```
 
-    Note: This may be changed to generate the shared secret during the MSO Portal
-          installation.
+    Note: This is just one example of how to copy the `mso-auth-secret` file from server to server.
 
 0. Download the Micronets Manager docker image:
 
