@@ -40,6 +40,7 @@ Instructions:
       --expiration-in-days 3650 \
       --ca-certfile micronets-ws-root.cert.pem \
       --ca-keyfile micronets-ws-root.key.pem
+
    cat micronets-ws-proxy.cert.pem micronets-ws-proxy.key.pem \
       > micronets-ws-proxy.pkeycert.pem
    ```
@@ -156,16 +157,16 @@ Instructions:
    and `/etc/micronets/micronets-ws-proxy docker-logs` should include:
 
    ```
-    2020-03-25T09:48:01.742413418Z 2020-03-25 09:48:01,742 micronets-ws-proxy: INFO ws_connected: client 140030650222128: Received HELLO message:
-    2020-03-25T09:48:01.742422736Z 2020-03-25 09:48:01,742 micronets-ws-proxy: INFO {
-    2020-03-25T09:48:01.742426214Z   "message": {
-    2020-03-25T09:48:01.742429177Z     "messageId": 0,
-    2020-03-25T09:48:01.742432027Z     "messageType": "CONN:HELLO",
-    2020-03-25T09:48:01.742434882Z     "peerClass": "micronets-ws-test-client",
-    2020-03-25T09:48:01.742437762Z     "peerId": "12345678",
-    2020-03-25T09:48:01.742440568Z     "requiresResponse": false
-    2020-03-25T09:48:01.742443356Z   }
-    2020-03-25T09:48:01.742445991Z }
+    micronets-ws-proxy: INFO ws_connected: client 140030650222128: Received HELLO message:
+    micronets-ws-proxy: INFO {
+       "message": {
+         "messageId": 0,
+         "messageType": "CONN:HELLO",
+         "peerClass": "micronets-ws-test-client",
+         "peerId": "12345678",
+         "requiresResponse": false
+       }
+     }
    ```
 
 11. Save the `micronets-manager.pkeycert.pem`, `micronets-gateway-service.pkeycert.pem`,

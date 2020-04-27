@@ -87,7 +87,7 @@ Prerequisites:
 0. Verify the MSO Portal started up successfully:
 
    ```
-   /etc/micronets/mso-portal.d/mso-portal logs
+   /etc/micronets/mso-portal.d/mso-portal docker-logs
    ```
 
    - You should see output like the following at the end of the log:
@@ -99,7 +99,7 @@ Prerequisites:
     ```
 
 0. To securely expose the MSO API, configure your https proxy to redirect to localhost port
-   3210. For example, an enginx configuration in `/etc/nginx/sites-enabled/micronets-mso-portal` 
+   3210. For example, an nginx configuration in `/etc/nginx/sites-enabled/micronets-mso-portal` 
    managed by Let's Encrypt could contain:
    
    ```
