@@ -24,7 +24,6 @@ Prerequisites:
    ```
    curl -L -O https://github.com/docker/compose/releases/download/1.24.1/docker-compose-Linux-`uname -m`
    sudo install -v -o root -m 755 docker-compose-Linux-`uname -m` /usr/local/bin/docker-compose
-   chmod +x /usr/local/bin/docker-compose
    ```
 
 0. Download the MSO Portal management script:
@@ -60,24 +59,41 @@ Prerequisites:
 
 0. Configure MSO Portal URLs:
  
-   Modify `/etc/micronets/mso-portal.d/mso-portal` to refer to the base URI for the MSO API
-   and the base URL for the websocket proxy. 
+   Some settings in the `/etc/micronets/mso-portal.d/mso-portal` file needs to be 
+   modified to reflect the "public" endpoints of some Micronets services.
+    
+   The value of the `DEF_MSO_API_BASE_URL` variable will depend on where you 
+   have the MSO Portal installed and how the frontend web service is configured.
+   It must contain a base URI that Micronet Manager instances can use to reach the 
+   MSO API. 
 
-   Set the `DEF_MSO_API_BASE_URL` variable to the base URI that the MSO can be reached at by 
-   the Micronets Manager instances. And set the `DEF_WS_PROXY_BASE_URL` variable to the base 
-   URI for creating endpoints on the websocket proxy where Micronet gateways and their peer 
-   Micronet Managers can connect to each other. 
-   
-   Note that the makeup of these URLs will depend on where you have the MSO Portal 
-   installed and how the frontend web service is configured. (some details and exmaple with 
-   nginx below)
+   e.g. If the nginx path to the MSO Portal web services is setup using the following 
+   `location` entry in the nginx `server` block for the webservice:
+   ```
+    location /micronets/mso-portal/ {
+        proxy_pass http://127.0.0.1:3210/;
+    }
+   ```
 
-   e.g.
+   Would require the `DEF_MSO_API_BASE_URL` path variable to be set to:
+
    ```
-   DEF_MSO_API_BASE_URL="https://dev.mso-portal-api.micronets.in:443"
-   DEF_WS_PROXY_BASE_URL="wss://ws-proxy-api.micronets.in:5050/micronets/v1/ws-proxy/gw"
+   DEF_MSO_API_BASE_URL="https://my-server.org/micronets/mso-portal/"
    ```
    
+   The value of the `DEF_WS_PROXY_BASE_URL` variable only has to be updated to reflect
+   the host and port where the Websocket Proxy is installed. The path prefix must reflect
+   the URL Prefix configured in the websocket proxy - by default `/micronets/v1/ws-proxy/`.
+   For example:
+   
+   ```
+   DEF_WS_PROXY_BASE_URL="wss://my-server.org:5050/micronets/v1/ws-proxy/gw"
+   ```
+
+   Note: This variable should match the `MM_GATEWAY_WEBSOCKET_BASE_URL` setting 
+         in the `/etc/micronets/micronets-manager.d/docker-compose.yml` file
+         on the server hosting the Micronets Manager containers.
+
 0. Start the MSO Portal docker image:
 
    ```
@@ -105,18 +121,10 @@ Prerequisites:
    ```
    # Micronets MSO Portal API
    server {
-        # SSL configuration
-        
-        listen 443 ssl;
-        listen [::]:443 ssl;
-
-        server_name mso-portal-api.my-domain.org;
-
-        location / {
-                proxy_pass      http://localhost:3210/;
+        server_name example.com;
+    
+        location /micronets/mso-portal/ {
+            proxy_pass http://127.0.0.1:3210/;
         }
-        ssl_certificate /etc/letsencrypt/live/mso-portal-api.my-domain.org/fullchain.pem; # managed by Certbot
-        ssl_certificate_key /etc/letsencrypt/ mso-portal-api.my-domain.org/privkey.pem; # managed by Certbot
    }
-```
-
+   ```

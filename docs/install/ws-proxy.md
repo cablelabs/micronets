@@ -65,14 +65,14 @@ Instructions:
    - These files will be used to enable the Micronets Gateway to connect to the proxy.
 
    ```
-    ./gen-leaf-cert --cert-basename micronets-gateway-service \
+    ./gen-leaf-cert --cert-basename micronets-gw-service \
         --subject-org-name "Micronets Gateway Service Websocket Client Cert" \
         --expiration-in-days 3650 \
         --ca-certfile micronets-ws-root.cert.pem \
         --ca-keyfile micronets-ws-root.key.pem
 
-    cat micronets-gateway-service.cert.pem micronets-gateway-service.key.pem \
-        > micronets-gateway-service.pkeycert.pem
+    cat micronets-gw-service.cert.pem micronets-gw-service.key.pem \
+        > micronets-gw-service.pkeycert.pem
    ```
 
 5. Download the management script:
@@ -89,10 +89,11 @@ Instructions:
 6. Copy the ws proxy server cert and key for use by the WS Proxy Docker container:
 
    ```
-   sudo install -v -o root -m 600 -D -t /etc/micronets/micronets-ws-proxy.d/lib micronets-ws-proxy.pkeycert.pem  micronets-ws-root.cert.pem 
+   sudo install -v -o root -m 600 -D -t /etc/micronets/micronets-ws-proxy.d/lib \
+        micronets-ws-proxy.pkeycert.pem  micronets-ws-root.cert.pem 
    ```
 
-7. Download the Micronets Websocket proxy image:
+7. Download the Micronets Websocket proxy docker image:
 
    ```
    /etc/micronets/micronets-ws-proxy docker-pull
@@ -169,6 +170,6 @@ Instructions:
      }
    ```
 
-11. Save the `micronets-manager.pkeycert.pem`, `micronets-gateway-service.pkeycert.pem`,
+11. Save the `micronets-manager.pkeycert.pem`, `micronets-gw-service.pkeycert.pem`,
    and `micronets-ws-root.cert.pem` files for configuring the Micronets Manager
    and Micronet Gateway components.

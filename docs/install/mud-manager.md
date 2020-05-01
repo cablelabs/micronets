@@ -11,7 +11,7 @@ and any Micronets gateways
 
 Instructions:
 
-1. Download the management script:
+0. Download the management script:
 
    ```
    curl -O https://raw.githubusercontent.com/cablelabs/micronets-mud-tools/nccoe-build-3/bin/micronets-mud-manager
@@ -22,7 +22,7 @@ Instructions:
     These values can be modified directly in your copy of the management script or overridden via command-line
     parameters.
 
-2. Download the docker image:
+0. Download the docker image:
 
    ```
    /etc/micronets/micronets-mud-manager docker-pull
@@ -31,19 +31,19 @@ Instructions:
     Note: If you cannot connect to the Docker service, use "sudo usermod -aG docker <username>" to
           add the user account to the docker group.
 
-3. Setup the MUD cache directory:
+0. Setup the MUD cache directory:
 
    ```
    /etc/micronets/micronets-mud-manager setup-cache-dir
    ```
 
-4. Start the MUD manager:
+0. Start the MUD manager:
 
    ```
    /etc/micronets/micronets-mud-manager docker-run
    ```
 
-5. Verify the MUD Manager is running:
+0. Verify the MUD Manager is running:
 
    ```
    /etc/micronets/micronets-mud-manager docker-logs
@@ -58,13 +58,28 @@ Instructions:
     micronets-mud-manager: INFO Additional CA certs: None
     micronets-mud-manager: INFO MUD cache directory: /mud-cache-dir
     micronets-mud-manager: INFO Controller: None
-    Running on https://0.0.0.0:8888 (CTRL + C to quit)
+    Running on https://127.0.0.1:8888 (CTRL + C to quit)
     ```
 
-6. Test the MUD Manager by retrieving a MUD URL:
+0. Setup the nginx entry to forward HTTPS requests to the MUD Manager by adding the following to the nginx `server` block:
+
+```
+    location /micronets/mud-manager/ {
+        proxy_pass      http://localhost:8888/;
+    }
+```
+
+Mmke sure to have nginx reload config files after modification:
+
+```
+sudo nginx -s reload
+```
+
+0. Test the MUD Manager by retrieving a MUD URL:
 
    ```
-   curl -q -X POST -H "Content-Type: application/json" localhost:8888/getMudFile \
+   curl -q -X POST -H "Content-Type: application/json" \
+    https://my.server.org/micronets/mud-manager/getMudFile \
     -d '{"url": "https://alpineseniorcare.com/micronets-mud/ciscopi.json"}' 
    ```
 

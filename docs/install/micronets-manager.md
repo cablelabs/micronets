@@ -26,7 +26,6 @@ Instructions:
    ```
    curl -L -O https://github.com/docker/compose/releases/download/1.24.1/docker-compose-Linux-`uname -m`
    sudo install -v -o root -m 755 docker-compose-Linux-`uname -m` /usr/local/bin/docker-compose
-   chmod +x /usr/local/bin/docker-compose
    ```
 
 0. Download the management script:
@@ -56,8 +55,7 @@ Instructions:
 0. Copy the shared secret value generated during the MSO Portal install:
 
    ```
-   scp user@mso-portal-server:/etc/micronets/mso-portal.d/lib/mso-auth-secret ./
-   sudo install -v -o root -m 600 -D -t /etc/micronets/micronets-manager.d/lib mso-auth-secret
+   sudo install -v -o root -g docker -m 660 -D -t /etc/micronets/micronets-manager.d/lib mso-auth-secret
    ```
 
     Note: This is just one example of how to copy the `mso-auth-secret` file from server to server.
@@ -72,6 +70,10 @@ Instructions:
           add the user account to the docker group.
 
 0. Configure nginx for Micronets Manager:
+
+   The Micronets Manager management script creates nginx forward entries that 
+   provide a unique URI for each MM docker image. To create the infrastructure for
+   these entries, run:
 
    ```
    sudo /etc/micronets/micronets-manager.d/mm-container setup-web-proxy
@@ -91,22 +93,8 @@ Instructions:
    
    ```
    server {
-        listen 443 ssl;
-        listen [::]:443 ssl;
-
-        root /var/www/mm.mydomain.in/html;
-
-        index index.html index.htm index.nginx-debian.html;
-
-        server_name mm.mydomain.in;
-
-        location / {
-                proxy_pass      http://localhost:8080/;
-        }
-
-        ssl_certificate /etc/letsencrypt/live/mm.mydomain.in/fullchain.pem; # managed by Certbot
-        ssl_certificate_key /etc/letsencrypt/live/mm.mydomain.in/privkey.pem; # managed by Certbot
-
+        server_name my-server.org;
+    
         include /etc/nginx/micronets-subscriber-forwards/*.conf;
    }
    ```
@@ -116,19 +104,35 @@ Instructions:
    But if you want to ensure your edits are OK, you can run 
    `sudo nginx -s reload` to have nginx reload the configuration files.
 
-0. Start a Micronets Manager for a subscriber:
+0. Configure Micronets Manager to communicate with other Micronets services:
 
-   ```
-   /etc/micronets/micronets-manager.d/mm-container start <subscriber-name>
-   ```
+    A number of MM settings need to be adjusted in the 
+    `/etc/micronets/micronets-manager.d/docker-compose.yml` file to enable interoperation 
+    with the other Micronets services. The settings can be found in the `services/api/environment` 
+    block of the `docker-compose.yml` file. For instance, if all the Micronets
+    services are running on the same server, edit the `docker-compose.yml` and set the 
+    variables to the following:
+    
+    ```
+      MM_API_PUBLIC_BASE_URL: https://my-server.org/sub/${MM_SUBSCRIBER_ID}/api
+      MM_APP_PUBLIC_BASE_URL: https://my-server.org/sub/${MM_SUBSCRIBER_ID}/app
+      MM_MSO_PORTAL_BASE_URL: https://my-server.org/micronets/mso-portal
+      MM_MUD_MANAGER_BASE_URL: https://my-server.org/micronets/mud-manager
+      MM_MUD_REGISTRY_BASE_URL: https://my-server.org/micronets/mud/v1
+      MM_GATEWAY_WEBSOCKET_BASE_URL: wss://my-server.org:5050/micronets/v1/ws-proxy/gw
+    ```
 
 0. Verify the Micronets Manager is running:
+
+   Note that no Micronet Managers will be running until a subscriber is added to the 
+   MSO Portal database. Once one is added, the health of a MM instance can be checked 
+   using:
 
    ```
    /etc/micronets/micronets-manager.d/mm-container logs <subscriber-name>
    ```
 
-   - You should see output like the following:
+   - You should see output like the following toward the top of the log:
 
     ```
     2020-03-31T10:52:22.771430740Z Debugger listening on ws://0.0.0.0:9229/4da874cb-3442-4d90-9b6e-d05f9defe91b
@@ -139,4 +143,3 @@ Instructions:
     2020-02-26 20:35:14 ESC[32minfoESC[39m [index.js]: Feathers application started on "http://0.0.0.0:3030"
     2020-02-26 20:35:14 ESC[32minfoESC[39m [index.js]: Public base URL: "https://dev.mm-api.micronets.in/sub/auntbetty/api"
     ```
-
