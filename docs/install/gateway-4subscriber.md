@@ -98,3 +98,77 @@
        "ssid" : "micronets-gw"
     }
    ```
+
+0. Configure the Micronets gateway with the WS Proxy keys provisioned for the gateway:
+
+   First copy the client cert and key and the WS root certificate into the gateway. 
+   Then copy them into the gateway service library to be loaded when the gateway is
+   restarted.
+
+   ```
+   sudo cp -v micronets-gw-service.pkeycert.pem micronets-ws-root.cert.pem /opt/micronets-gw/lib/
+   ```
+
+0. Change the websocket lookup URL to use the MSO Portal service on your server:
+
+   The Micronet gateway service config file `/opt/micronets-gw/config.py` contains
+   the `WEBSOCKET_LOOKUP_URL`, which needs to be set to the MSO websocket lookup 
+   endpoint. For example:
+   
+   ```
+   WEBSOCKET_LOOKUP_URL = 'https://my-server.org//micronets/mso-portal/portal/v1/socket?gatewayId=micronets-gw'
+   ```
+   
+0. Restart the Micronets gateway service:
+
+   ```
+   sudo systemctl restart micronets-gw.service 
+   ```
+
+0. Check the Micronets Gateway Service log to check the gateway's websocket registration status:
+
+   In the file `/opt/micronets-gw/micronets-gw.log`, the following entries indicate a successful
+   resolution of the websocket URL and successful authentication of the gateway's websocket
+   certificate & key:
+
+   ```
+    WSConnector: initializing...
+    WSConnector: Websocket URL (None=URL Lookup): None
+    WSConnector: Client cert-key File: /opt/micronets-gw/lib/micronets-gw-service.pkeycert.pem
+    WSConnector: CA File: /opt/micronets-gw/lib/micronets-ws-root.cert.pem
+    WSConnector: Registering handler for message type prefix DPP: <app.dpp_handler.DPPHandler object at 0x7f06b61b2710>
+    WSConnector: setup_connection: starting...
+    WSConnector: get_websocket_url_for_gateway(grandpa-gw)...
+    WSConnector: get_websocket_url_for_gateway(grandpa-gw): Retrieving https://my-server.org//micronets/mso-portal/portal/v1/socket?gatewayId=micronets-gw
+    WSConnector: get_websocket_url_for_gateway(grandpa-gw): Received response: {'socketUrl': 'wss://my-server.org:5050/micronets/v1/ws-proxy/gw/subscriber-001', 'subscriberId': 'subscriber-001', 'gatewayId': 'micronets-gw'}
+    WSConnector: get_websocket_url_for_gateway(grandpa-gw): Received URL: wss://my-server.org:5050/micronets/v1/ws-proxy/gw/subscriber-001
+    WSConnector: init_connect opening wss://my-server.org:5050/micronets/v1/ws-proxy/gw/subscriber-001...
+    WSConnector: init_connect opened wss://my-server.org:5050/micronets/v1/ws-proxy/gw/subscriber-001.
+    WSConnector Sending HELLO message...
+    WSConnector: Waiting for HELLO messages...
+    WSConnector: HELLO handshake complete.
+
+   ```
+   
+0. Establishment of the gateway-manager control connection can also be performed by examining
+   the websocket proxy connection reports in the WS Proxy log.
+   
+   To look at WS Proxy logs, run the following on the websocket proxy server:
+   
+   ```
+   /etc/micronets/micronets-ws-proxy docker-logs | less   
+   ```
+   
+   Look for the following in the log (with the "MEETUP ID" matching the subscriber name in question):
+   
+   ```
+    WEBSOCKET MEETUP TABLE REPORT FOR 0.0.0.0:5050//micronets/v1/ws-proxy/
+    
+     MEETUP ID: gw/subscriber-001
+       Client 1: Client 140604181239960 (peer: gw service 139666802147224) @ ('50.39.97.46', 59672))
+       Client 2: Client 140604181241584 (peer: 12345678) @ ('172.17.0.1', 36270))
+   ```
+
+   This indicates that the micronets gateway service and the micronets manager for the subscriber 
+   and connected and can exchange provisioning commands and event indications.
+   
