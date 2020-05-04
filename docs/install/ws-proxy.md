@@ -17,15 +17,15 @@ Instructions:
 0. Download the cert generation scripts:
 
    ```
-   curl -O https://raw.githubusercontent.com/cablelabs/micronets-ws-proxy/nccoe-build-3/bin/gen-root-cert
-   curl -O https://raw.githubusercontent.com/cablelabs/micronets-ws-proxy/nccoe-build-3/bin/gen-leaf-cert
-   chmod +x gen-root-cert gen-leaf-cert
+   curl -s -O https://raw.githubusercontent.com/cablelabs/micronets-ws-proxy/nccoe-build-3/bin/gen-root-cert
+   curl -s -O https://raw.githubusercontent.com/cablelabs/micronets-ws-proxy/nccoe-build-3/bin/gen-leaf-cert
+   sudo install -v -o root -m 755 -D -t /etc/micronets/micronets-ws-proxy.d/ gen-*-cert
    ```
 
 1. Create the root certificate for the WS proxy:
 
    ```
-   ./gen-root-cert --cert-basename micronets-ws-root \
+   /etc/micronets/micronets-ws-proxy.d/gen-root-cert --cert-basename micronets-ws-root \
        --subject-org-name "Micronets Websocket Root Cert" \
        --expiration-in-days 3650
    ```
@@ -35,7 +35,7 @@ Instructions:
    - This certificate and key is used to host the websocket proxy server.
 
    ```
-   ./gen-leaf-cert --cert-basename micronets-ws-proxy \
+   /etc/micronets/micronets-ws-proxy.d/gen-leaf-cert --cert-basename micronets-ws-proxy \
       --subject-org-name "Micronets Websocket Proxy Cert" \
       --expiration-in-days 3650 \
       --ca-certfile micronets-ws-root.cert.pem \
@@ -50,7 +50,7 @@ Instructions:
    - These files will be used to enable the Micronets Manager to connect to the proxy.
 
    ```
-    ./gen-leaf-cert --cert-basename micronets-manager \
+    /etc/micronets/micronets-ws-proxy.d/gen-leaf-cert --cert-basename micronets-manager \
         --subject-org-name "Micronets Manager Websocket Client Cert" \
         --expiration-in-days 3650 \
         --ca-certfile micronets-ws-root.cert.pem \
@@ -65,7 +65,7 @@ Instructions:
    - These files will be used to enable the Micronets Gateway to connect to the proxy.
 
    ```
-    ./gen-leaf-cert --cert-basename micronets-gw-service \
+    /etc/micronets/micronets-ws-proxy.d/gen-leaf-cert --cert-basename micronets-gw-service \
         --subject-org-name "Micronets Gateway Service Websocket Client Cert" \
         --expiration-in-days 3650 \
         --ca-certfile micronets-ws-root.cert.pem \
@@ -78,8 +78,8 @@ Instructions:
 5. Download the management script:
 
    ```
-   curl -O https://raw.githubusercontent.com/cablelabs/micronets-ws-proxy/nccoe-build-3/bin/micronets-ws-proxy
-   sudo install -v -o root -m 755 -D -t /etc/micronets/ micronets-ws-proxy 
+   curl -s -O https://raw.githubusercontent.com/cablelabs/micronets-ws-proxy/nccoe-build-3/bin/micronets-ws-proxy
+   sudo install -v -o root -m 755 -D -t /etc/micronets/micronets-ws-proxy.d/ micronets-ws-proxy 
    ```
 
     Note: These instructions assume the default values contained in the micronets-ws-proxy management script.
@@ -96,7 +96,7 @@ Instructions:
 7. Download the Micronets Websocket proxy docker image:
 
    ```
-   /etc/micronets/micronets-ws-proxy docker-pull
+   /etc/micronets/micronets-ws-proxy.d/micronets-ws-proxy docker-pull
    ```
 
     Note: If you cannot connect to the Docker service, use "sudo usermod -aG docker <username>" to
@@ -105,13 +105,13 @@ Instructions:
 8. Start the proxy:
 
    ```
-   /etc/micronets/micronets-ws-proxy docker-run
+   /etc/micronets/micronets-ws-proxy.d/micronets-ws-proxy docker-run
    ```
 
 9. Verify the Websocket Proxy is running:
 
    ```
-   /etc/micronets/micronets-ws-proxy docker-logs
+   /etc/micronets/micronets-ws-proxy.d/micronets-ws-proxy docker-logs
    ```
 
    - You should see output like the following:
@@ -155,7 +155,7 @@ Instructions:
     ws-test-client: Waiting for HELLO message...
    ```
 
-   and `/etc/micronets/micronets-ws-proxy docker-logs` should include:
+   and `/etc/micronets/micronets-ws-proxy.d/micronets-ws-proxy docker-logs` should include:
 
    ```
     micronets-ws-proxy: INFO ws_connected: client 140030650222128: Received HELLO message:
@@ -172,4 +172,4 @@ Instructions:
 
 11. Save the `micronets-manager.pkeycert.pem`, `micronets-gw-service.pkeycert.pem`,
    and `micronets-ws-root.cert.pem` files for configuring the Micronets Manager
-   and Micronet Gateway components.
+   and Micronets Gateway components.

@@ -73,10 +73,10 @@
     curl -s -X POST https://my-server.org/sub/subscriber-001/api/mm/v1/micronets/odl \
      -H "Content-Type: application/json" -d @./gateway-config-001.json | json_pp
     ```
-    
-    The applied gateway config should be returned if successfully applied.
-    
-0. Confirm that the Micronets Manager has registered with the MSO Portal:
+
+    This should return 200 and return applied gateway config when successfully applied.
+
+0. Confirm that the gateway ID is updated in the MSO Portal:
 
    After the gateway configuration is applied, the Micronets Manager should have
    registered itself with the MSO Portal. To confirm, the following endpoint can 
@@ -86,18 +86,18 @@
    curl -s https://my-server.org/micronets/mso-portal/portal/v1/subscriber/subscriber-001 | json_pp
    ```
    
-   which should return a json object with a populated `registry` field that refers back
-   to the Micronets Manager instance for the subscriber. e.g.:
+   which should return a json object with a `gatewayId` field that matches the gatewayId
+   in the Gateway Configuration file. e.g.:
 
-   ```
+    ```
     {
-       "gatewayId" : "micronets-gw",
-       "registry" : "https://my-server.org/sub/subscriber-001/api",
        "id" : "subscriber-001",
        "name" : "Subscriber 001",
+       "registry" : "https://my-server.org/sub/subscriber-001/api",
+       "gatewayId" : "micronets-gw",
        "ssid" : "micronets-gw"
     }
-   ```
+    ```
 
 0. Configure the Micronets gateway with the WS Proxy keys provisioned for the gateway:
 

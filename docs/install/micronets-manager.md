@@ -122,24 +122,6 @@ Instructions:
       MM_GATEWAY_WEBSOCKET_BASE_URL: wss://my-server.org:5050/micronets/v1/ws-proxy/gw
     ```
 
-0. Verify the Micronets Manager is running:
-
-   Note that no Micronet Managers will be running until a subscriber is added to the 
-   MSO Portal database. Once one is added, the health of a MM instance can be checked 
-   using:
-
-   ```
-   /etc/micronets/micronets-manager.d/mm-container logs <subscriber-name>
-   ```
-
-   - You should see output like the following toward the top of the log:
-
-    ```
-    2020-03-31T10:52:22.771430740Z Debugger listening on ws://0.0.0.0:9229/4da874cb-3442-4d90-9b6e-d05f9defe91b
-    2020-03-31T10:52:22.771503633Z For help see https://nodejs.org/en/docs/inspector
-    2020-02-26 20:35:14 ESC[32minfoESC[39m [index.js]: MONGODB URI : "mongodb://mongodb/micronets"
-    2020-02-26 20:35:14 ESC[32minfoESC[39m [index.js]: MONGOOSE URI : "mongodb://mongodb/micronets"
-    ...
-    2020-02-26 20:35:14 ESC[32minfoESC[39m [index.js]: Feathers application started on "http://0.0.0.0:3030"
-    2020-02-26 20:35:14 ESC[32minfoESC[39m [index.js]: Public base URL: "https://dev.mm-api.micronets.in/sub/auntbetty/api"
-    ```
+    * Note: Micronets Managers are created per-subscriber. So validation of 
+            these settings can be performed [after adding the first subscriber in the 
+            Operations Guide](../operation/subscriber-setup.md).

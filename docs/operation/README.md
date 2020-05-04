@@ -7,13 +7,14 @@ elements of a network operator's management network, a home wireless gateway, an
 an on-boarding application.
 
 This guide details the operation of the Micronet Prototype components. A separate
-[Installation Guide](installation-guide.md) document describes the installation of
+[Installation Guide](../install/README.md) document describes the installation of
 the prototype components.
 
-1. [Creating and registering subscribers](docs/operation/mso-portal.md)
-2. [Configuring a Micronets Manager for a Gateway](docs/operation/micronets-manager.md)
-3. [Using the MUD Registry to register/deregister/locate MUD files](docs/operation/mud-registry.md)
-4. [General operation of the Pi Test Device](docs/operation/pi-test-device.md)
-5. [General operation of the Mobile Device (phone)](docs/operation/mobile-device.md)
-6. [Onboarding a test Pi device into a Micronet](docs/operation/pi-onboarding.md)
-7. [Removing devices from a Micronet](docs/operation/pi-offboarding.md)
+0. [Add a Subscriber and user account](subscriber-setup.md)
+0. [Associating a the Micronets Gateway with a subscriber](gateway-4subscriber.md)
+0. [Using the MUD Registry to register/deregister/locate MUD files](docs/operation/mud-registry.md)
+0. [General operation of the Pi Test Device](docs/operation/pi-test-device.md)
+0. [General operation of the Mobile Device (phone)](docs/operation/mobile-device.md)
+0. [Onboarding a test Pi device into a Micronet](docs/operation/pi-onboarding.md)
+0. [Removing devices from a Micronet](docs/operation/pi-offboarding.md)
+0. [Removing a Subscriber](subscriber-removal.md)

@@ -2,7 +2,7 @@
 
 ### for NCCoE Build 3
 
-0. Add a subscriber and associated user account to the MSO Portal:
+0. Add a subscriber and associated user account and password to the MSO Portal:
 
     ```
     curl -s -X POST https://my-server.org/micronets/mso-portal/portal/v1/subscriber \
@@ -17,16 +17,16 @@
         }' \
     | json_pp
     ```
-    
+
     if this executes successfully, it should return a 200 with the added subscriber's fields. e.g.:
     
     ```
     {
-       "ssid" : "micronets-gw",
        "id" : "subscriber-001",
-       "gatewayId" : "micronets-gw",
        "name" : "Subscriber 001",
-       "registry" : ""
+       "registry" : "",
+       "gatewayId" : "default-gw-subscriber-001",
+       "ssid" : "micronets-gw"
     }
     ```
 
@@ -49,21 +49,41 @@
     
     Note: The nginx reload requires `sudo`. So you may be prompted for a password.
 
-0. Confirm that the subscriber's Micronets Manager is registered with the MSO Portal:
+0. You can confirm that the Micronets Manager started up successfully by running:
+
+   Note that no Micronet Managers will be running until a subscriber is added to the 
+   MSO Portal database. Once one is added, the health of a MM instance can be checked 
+   using:
+
+   ```
+   /etc/micronets/micronets-manager.d/mm-container logs subscriber-001
+   ```
+
+   - You should see output like the following toward the top of the log:
 
     ```
-    curl -s https://my0server.org/micronets/mso-portal/portal/v1/subscriber/subscriber-002 | json_pp
+    Feathers application started on "http://0.0.0.0:3030"
+    Public base URL: "https://my-server.org/sub/subscriber-001/api"
+    ...
+    Mano web socket base url : "wss://my-server.org:5050/micronets/v1/ws-proxy/gw"
+    MSO Portal url : "https://my-server.org/micronets/mso-portal"
     ```
-    
-    which should return the :
-    
+
+0. Verify the Micronets Manager for the subscriber has registered with the MSO Portal:
+
+   ``` 
+   curl -s https://my-server.org/micronets/mso-portal/portal/v1/subscriber/subscriber-001 | json_pp
+   ```
+
+   which should return a json object with a populated `registry` field that refers back
+   to the Micronets Manager instance for the subscriber. e.g.:
+
     ```
     {
-       "gatewayId" : "micronets-gw",
-       "registry" : "",
-       "ssid" : "micronets-gw",
+       "id" : "subscriber-001",
        "name" : "Subscriber 001",
-       "id" : "subscriber-001"
+       "registry" : "https://my-server.org/sub/subscriber-001/api",
+       "gatewayId" : "default-gw-subscriber-001",
+       "ssid" : "micronets-gw"
     }
     ```
-

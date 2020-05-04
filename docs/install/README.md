@@ -30,7 +30,9 @@ High-level Steps:
 0. [Install & configure the MUD Registry service](mud-registry.md)
 0. [Install & configure Micronets Manager](micronets-manager.md)
 0. [Example single-server nginx configuration](example-1server-nginx.md)
-0. [Add a Subscriber and user account](subscriber-setup.md)
-0. [Configure the Micronets Gateway for a subscriber](gateway-4subscriber.md)
 0. [Install & configure the Micronets mobile app](mobile-device.md)
 0. [Setup & configure the Pi test device](pi-test-device.md)
+
+Once the Micronets cloud components are installed the [Micronets
+Operation Guide](../operation/README.md) provides a guide for adding/removing subscribers, 
+creating/removing Micronets, and onboarding/removing devices.

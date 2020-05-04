@@ -15,7 +15,7 @@ Instructions:
 
    ```
    curl -O https://raw.githubusercontent.com/cablelabs/micronets-mud-tools/nccoe-build-3/bin/micronets-mud-manager
-   sudo install -v -o root -m 755 -D -t /etc/micronets/ micronets-mud-manager
+   sudo install -v -o root -m 755 -D -t /etc/micronets/micronets-mud-manager.d/ micronets-mud-manager
    ```
 
     Note: These instructions assume the default values contained in the management script.
@@ -25,7 +25,7 @@ Instructions:
 0. Download the docker image:
 
    ```
-   /etc/micronets/micronets-mud-manager docker-pull
+   /etc/micronets/micronets-mud-manager.d/micronets-mud-manager docker-pull
    ```
 
     Note: If you cannot connect to the Docker service, use "sudo usermod -aG docker <username>" to
@@ -34,19 +34,19 @@ Instructions:
 0. Setup the MUD cache directory:
 
    ```
-   /etc/micronets/micronets-mud-manager setup-cache-dir
+   /etc/micronets/micronets-mud-manager.d/micronets-mud-manager setup-cache-dir
    ```
 
 0. Start the MUD manager:
 
    ```
-   /etc/micronets/micronets-mud-manager docker-run
+   /etc/micronets/micronets-mud-manager.d/micronets-mud-manager docker-run
    ```
 
 0. Verify the MUD Manager is running:
 
    ```
-   /etc/micronets/micronets-mud-manager docker-logs
+   /etc/micronets/micronets-mud-manager.d/micronets-mud-manager docker-logs
    ```
 
    - You should see output like the following:
@@ -108,5 +108,5 @@ sudo nginx -s reload
    The cache cah be cleared by running:
    
    ```
-   /etc/micronets/micronets-mud-manager clear-cache-dir
+   /etc/micronets/micronets-mud-manager.d/micronets-mud-manager clear-cache-dir
    ```

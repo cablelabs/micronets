@@ -18,6 +18,10 @@ server {
         proxy_pass      http://localhost:3082/registry;
     }
 
+    location /registry/devices {
+        proxy_pass      http://localhost:3082/vendors/;
+    }
+
     location /micronets/mud-manager/ {
         proxy_pass      http://localhost:8888/;
     }
