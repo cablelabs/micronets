@@ -134,17 +134,36 @@
    ```
    sudo cp -v micronets-gw-service.pkeycert.pem micronets-ws-root.cert.pem /opt/micronets-gw/lib/
    ```
+   
+   Note: This assumes the default name/location of the client cert and key files.
+   The name/location of the gateway's client cert/key file and the root WS proxy 
+   certificate file can be specified by modifying the `WEBSOCKET_TLS_CERTKEY_FILE` and
+   `WEBSOCKET_TLS_CA_CERT_FILE` variables in the `/opt/micronets-gw/config.py` gateway 
+   configuration file, if so desired.
 
 0. Change the websocket lookup URL to use the MSO Portal service on your server:
 
    The Micronet gateway service config file `/opt/micronets-gw/config.py` contains
-   the `WEBSOCKET_LOOKUP_URL`, which needs to be set to the MSO websocket lookup 
-   endpoint. For example:
+   the `WEBSOCKET_LOOKUP_URL` config variable, which needs to be set to the MSO Portal
+   websocket lookup endpoint (see the [MSO Portal Install Instructions](../install/mso-portal.md)). 
+   For example this can be set in the `BaseConfig` section of `config.py` using:
    
    ```
-   WEBSOCKET_LOOKUP_URL = 'https://my-server.org//micronets/mso-portal/portal/v1/socket?gatewayId=micronets-gw'
+   WEBSOCKET_LOOKUP_URL = 'https://my-server.org/micronets/mso-portal/portal/v1/socket?gatewayId={gateway_id}'
    ```
-   
+
+0. Set the Gateway ID:
+
+   The Micronet gateway's ID will default to the short machine name (run `hostname -s`
+   to see the machine name). If the machine name does not
+   match the gateway ID provided above ("micronets-gw") you can set the Gateway ID via the
+   `GATEWAY_ID` in the Micronet gateway service config file `/opt/micronets-gw/config.py`.
+   For example this can be set in the `BaseConfig` section of `config.py` using:
+
+   ```
+   GATEWAY_ID = 'micronets-gw'
+   ```
+
 0. Restart the Micronets gateway service:
 
    ```
