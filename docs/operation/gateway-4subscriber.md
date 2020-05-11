@@ -10,8 +10,9 @@
     provided in the gateway configuration file. 
     
     For example, if the gateway has one wireless interface ("wlp2s0" with MAC address 
-    "c0:d9:62:ae:f0:c2") and one wired interface ("wlp2s0" with MAC address "c0:d9:62:ae:f0:c2"),
-    a gateway configuration like the following could be registered for a subscriber:
+    "c0:d9:62:ae:f0:c2") and one wired interface ("enx00e04c534458" with MAC address 
+    "00:e0:4c:53:44:58") that you wanted to use for micronets, a gateway configuration 
+    like the following could be registered for a subscriber:
     
     ```
     {
@@ -63,6 +64,12 @@
         ]
     }
     ``` 
+    
+    Note that a wireless interface can support multiple micronets. In this case
+    it's declared to support up to 5 "class C" micronets (10.135.1.x through 10.135.5.x).
+    Wired interfaces can only support 1 micronet each. For all micronets defined by
+    this gateway config, devices can be assigned addresses from 2-254 on each 
+    micronet - with the gateway address on each set to 1.
 
 0. Registering a gateway configuration for a subscriber:
 
@@ -71,11 +78,30 @@
     
     ```
     curl -s -X POST https://my-server.org/sub/subscriber-001/api/mm/v1/micronets/odl \
-     -H "Content-Type: application/json" -d @./gateway-config-001.json | json_pp
+    -H "Content-Type: application/json" -d @./gateway-config-001.json | json_pp
     ```
 
     This should return 200 and return applied gateway config when successfully applied.
 
+    You can retrieve/check the gateway config using:
+    
+    ```
+    curl -s https://my-server.org/sub/subscriber-001/api/mm/v1/micronets/odl/<gatewayId> \
+    | json_pp
+    ```
+
+    Where `<gatewayId>` is the gateway ID specified in your gateway config file.
+
+    You can delete the gateway config using:
+ 
+    ```
+    curl -s -X DELETE https://my-server.org/sub/subscriber-001/api/mm/v1/micronets/odl/<gatewayId> \
+    | json_pp
+    ```
+
+    Where `<gatewayId>` is the gateway ID specified in your gateway config file.
+    
+    
 0. Confirm that the gateway ID is updated in the MSO Portal:
 
    After the gateway configuration is applied, the Micronets Manager should have

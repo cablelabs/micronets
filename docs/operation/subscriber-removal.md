@@ -10,7 +10,16 @@ Removing a subscriber is a pretty simple process.
     curl -s -X DELETE https://my-server.org/micronets/mso-portal/portal/v1/subscriber/subscriber-001
     ```
 
-0. Remove the Micronets Manager instance for a subscriber by running:
+    Note: If there are issues deleting the subscriber (e.g. due to issues 
+    communicating with the peer Micronets Manager), the subscriber entries 
+    in the mso-portal subtables can be deleted using:
+
+    ```
+    curl -s -X DELETE https://my-server.org/micronets/mso-portal/portal/v1/users/subscriber-001
+    curl -s -X DELETE https://my-server.org/micronets/mso-portal/portal/v1/socket/subscriber-001
+    ```
+
+0. Remove the Micronets Manager docker container for a subscriber by running:
 
     ```
     /etc/micronets/micronets-manager.d/mm-container delete subscriber-001
@@ -30,8 +39,6 @@ Removing a subscriber is a pretty simple process.
     removed '/etc/nginx/micronets-subscriber-forwards/sub-subscriber-001.conf'
     Issuing nginx reload (running 'sudo nginx -s reload')
     ```
-
-
 
 Add a subscriber and associated user account and password to the MSO Portal:
 

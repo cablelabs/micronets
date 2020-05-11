@@ -51,10 +51,6 @@
 
 0. You can confirm that the Micronets Manager started up successfully by running:
 
-   Note that no Micronet Managers will be running until a subscriber is added to the 
-   MSO Portal database. Once one is added, the health of a MM instance can be checked 
-   using:
-
    ```
    /etc/micronets/micronets-manager.d/mm-container logs subscriber-001
    ```

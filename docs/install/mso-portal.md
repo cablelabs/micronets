@@ -110,8 +110,8 @@ Prerequisites:
 
     ```
     Feathers application started on "http://0.0.0.0:3210"
-    Feathers  webSocketBaseUrl "wss://ws-proxy-api.micronets.in:5050/micronets/v1/ws-proxy/gw"
-    Feathers  publicApiBaseUrl "https://dev.mso-portal-api.micronets.in:443"
+    Feathers  webSocketBaseUrl "wss://my-server.org:5050/micronets/v1/ws-proxy/gw"
+    Feathers  publicApiBaseUrl "https://my-server.org:443"
     ```
 
 0. To securely expose the MSO API, configure your https proxy to redirect to localhost port

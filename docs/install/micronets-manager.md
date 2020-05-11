@@ -24,15 +24,15 @@ Instructions:
    If the version is earlier than v1.23.1 run the following to install a new version in `/usr/local/bin`:
 
    ```
-   curl -L -O https://github.com/docker/compose/releases/download/1.24.1/docker-compose-Linux-`uname -m`
+   curl -s -L -O https://github.com/docker/compose/releases/download/1.24.1/docker-compose-Linux-`uname -m`
    sudo install -v -o root -m 755 docker-compose-Linux-`uname -m` /usr/local/bin/docker-compose
    ```
 
 0. Download the management script:
 
    ```
-   curl -O https://raw.githubusercontent.com/cablelabs/micronets-manager/nccoe-build-3/scripts/mm-container
-   curl -O https://raw.githubusercontent.com/cablelabs/micronets-manager/nccoe-build-3/scripts/docker-compose.yml
+   curl -s -O https://raw.githubusercontent.com/cablelabs/micronets-manager/nccoe-build-3/scripts/mm-container
+   curl -s -O https://raw.githubusercontent.com/cablelabs/micronets-manager/nccoe-build-3/scripts/docker-compose.yml
    sudo install -v -o root -m 755 -D -t /etc/micronets/micronets-manager.d mm-container
    sudo install -v -o root -m 644 -D -t /etc/micronets/micronets-manager.d docker-compose.yml
    ```
