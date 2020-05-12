@@ -195,7 +195,7 @@
 
    ```
    
-0. Establishment of the gateway-manager control connection can also be performed by examining
+0. Establishment of the gateway-manager control connection can also be confirmed by examining
    the websocket proxy connection reports in the WS Proxy log.
    
    To look at WS Proxy logs, run the following on the websocket proxy server:
