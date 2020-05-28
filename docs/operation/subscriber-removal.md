@@ -34,6 +34,13 @@ removing the subscriber's micronets, and removing the subscriber's Micronets Man
     curl -s -X DELETE https://my-server.org/sub/subscriber-001/api/mm/v1/subscriber/subscriber-001/micronets
     ```
 
+    This will remove the Micronets on the connected Micronets gateway. If the gateway is not
+    connected to its peer Micronets Manager, the Micronets can be deleted directly on the gateway using:
+
+    ```
+    curl -s -X DELETE http://localhost:5000/micronets/v1/gateway/micronets
+    ```
+
 0. You can verify the Micronets have been deleted by running:
 
     ```
