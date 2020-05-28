@@ -2,7 +2,8 @@
 
 ### for NCCoE Build 3
 
-Removing a subscriber is a pretty simple process.
+Removing a subscriber involves removing the subscriber from the MSO Portal database, 
+removing the subscriber's micronets, and removing the subscriber's Micronets Manager.
 
 0. Remove the subscriber from the MSO Portal using:
 
@@ -10,13 +11,53 @@ Removing a subscriber is a pretty simple process.
     curl -s -X DELETE https://my-server.org/micronets/mso-portal/portal/v1/subscriber/subscriber-001
     ```
 
-    Note: If there are issues deleting the subscriber (e.g. due to issues 
-    communicating with the peer Micronets Manager), the subscriber entries 
-    in the mso-portal subtables can be deleted using:
+0. Verify the subscriber is removed from the MSO Portal:
+
+    ```
+    curl -s https://my-server.org/micronets/mso-portal/portal/v1/subscriber/subscriber-001
+    curl -s https://my-server.org/micronets/mso-portal/portal/v1/users/subscriber-001
+    curl -s https://my-server.org/micronets/mso-portal/portal/v1/socket/subscriber-001
+    ```
+
+    Note: If there are issues deleting the subscriber from the subtables (if the above queries
+    return non-empty results - e.g. due to issues communicating with the peer Micronets Manager), 
+    the subscriber entries in the mso-portal subtables can be deleted using:
 
     ```
     curl -s -X DELETE https://my-server.org/micronets/mso-portal/portal/v1/users/subscriber-001
     curl -s -X DELETE https://my-server.org/micronets/mso-portal/portal/v1/socket/subscriber-001
+    ```
+
+0. Remove all the Micronets for the subscriber using:
+
+    ```
+    curl -s -X DELETE https://my-server.org/sub/subscriber-001/api/mm/v1/subscriber/subscriber-001/micronets
+    ```
+
+0. You can verify the Micronets have been deleted by running:
+
+    ```
+    curl -s https://my-server.org/sub/subscriber-001/api/mm/v1/subscriber/subscriber-001/micronets
+    ```
+    
+    Which should return an empty `micronets` list. e.g.
+    
+    ```
+    {
+       "skip" : 0,
+       "data" : [
+          {
+             "micronets" : [],
+             "ssid" : "micronets-gw",
+             "name" : "Subscriber 001",
+             "gatewayId" : "micronets-gw",
+             "id" : "subscriber-001",
+             ...
+          }
+       ],
+       "total" : 1,
+       "limit" : 500
+    }
     ```
 
 0. Remove the Micronets Manager docker container for a subscriber by running:
@@ -40,69 +81,10 @@ Removing a subscriber is a pretty simple process.
     Issuing nginx reload (running 'sudo nginx -s reload')
     ```
 
-Add a subscriber and associated user account and password to the MSO Portal:
+0. You can confirm the subscriber MM is removed by running:
 
     ```
-    curl -s -X POST https://my-server.org/micronets/mso-portal/portal/v1/subscriber \
-        -H "Content-Type: application/json" \
-        -d '{
-                "id" : "subscriber-001",
-                "ssid" : "micronets-gw",
-                "name" : "Subscriber 001",
-                "gatewayId":"micronets-gw",
-                "username":"micronets",
-                "password":"micronets"
-        }' \
-    | json_pp
+    curl -s https://my-server.org/sub/subscriber-001/api/mm/v1/subscriber/subscriber-001
     ```
 
-    if this executes successfully, it should return a 200 with the added subscriber's fields. e.g.:
-    
-    ```
-    {
-       "ssid" : "micronets-gw",
-       "id" : "subscriber-001",
-       "gatewayId" : "micronets-gw",
-       "name" : "Subscriber 001",
-       "registry" : ""
-    }
-    ```
-
-0. Start the Micronets Manager for the subscriber by running:
-
-    ```
-    /etc/micronets/micronets-manager.d/mm-container start subscriber-001
-    ```
-    
-    this should produce output like the following:
-    
-    ```
-    Creating resources for subscriber subscriber-001...
-    Creating network "sub-subscriber-001_mm-priv-network" with the default driver
-    Creating volume "sub-subscriber-001_mongodb" with default driver
-    Creating sub-subscriber-001_mongodb_1 ... done
-    Creating sub-subscriber-001_api_1     ... done
-    Issuing nginx reload (running 'sudo nginx -s reload')
-    ```
-    
-    Note: The nginx reload requires `sudo`. So you may be prompted for a password.
-
-0. You can confirm that the Micronets Manager started up successfully by running:
-
-   Note that no Micronet Managers will be running until a subscriber is added to the 
-   MSO Portal database. Once one is added, the health of a MM instance can be checked 
-   using:
-
-   ```
-   /etc/micronets/micronets-manager.d/mm-container logs subscriber-001
-   ```
-
-   - You should see output like the following toward the top of the log:
-
-    ```
-    Feathers application started on "http://0.0.0.0:3030"
-    Public base URL: "https://my-server.org/sub/subscriber-001/api"
-    ...
-    Mano web socket base url : "wss://my-server.org:5050/micronets/v1/ws-proxy/gw"
-    MSO Portal url : "https://my-server.org/micronets/mso-portal"
-    ```
+    This should return a 404 error if the MM for the subscriber is successfully removed.
