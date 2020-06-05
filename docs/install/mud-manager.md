@@ -22,6 +22,18 @@ Instructions:
     These values can be modified directly in your copy of the management script or overridden via command-line
     parameters.
 
+0. Configure the management script for your setup:
+
+   Confirm and/or modify the default variables in the management script.
+   For example:
+
+   ```
+    DEF_MUD_CACHE_PATH=/var/cache/micronets-mud
+    DEF_BIND_PORT=8888
+    DEF_BIND_ADDRESS=127.0.0.1
+    DEF_CONTROLLER_ADDRESS=my-server.org
+   ```
+
 0. Download the docker image:
 
    ```
